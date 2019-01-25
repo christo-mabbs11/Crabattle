@@ -18,6 +18,13 @@ public class CrabController : MonoBehaviour
     private float turnSpeed = 40.0f;
     private float moveSpeed = 1.0f;
 
+    /////////////////////////////
+    // Fight related variables //
+    /////////////////////////////
+
+    private float crabAttack = 40.0f;
+    private float crabDefence = 40.0f;
+
     ///////////
     // Setup //
     ///////////

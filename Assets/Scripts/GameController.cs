@@ -2,15 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //////////////////////////////////
+    // Game state relates varibales //
+    //////////////////////////////////
+
+    enum GAME_STATE { STATE_MENU = 0, STATE_COUNTDOWN = 1, STATE_FIGHT = 2 };
+    private int GameState = (int)GAME_STATE.STATE_MENU;
+
+    void Update()
+    {
+
+    }
+
+    void UpdateGameState()
+    {
+
+
+    }
+
+    void StartGame()
+    {
+
+    }
+
 }
