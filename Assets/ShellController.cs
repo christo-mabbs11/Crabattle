@@ -11,6 +11,7 @@ public class ShellController : MonoBehaviour
     public GameObject shellObject2;
     public GameObject shellObject3;
     public GameObject shellObject4;
+    public GameObject crabShellConnectionPoint;
 
     private float shellGetCooldown = 1;
 
@@ -23,11 +24,10 @@ public class ShellController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Cooldown = "+shellGetCooldown);
+        //Debug.Log("Cooldown = "+shellGetCooldown);
         shellGetCooldown = shellGetCooldown - Time.deltaTime;
         if (shellGetCooldown <= 0)
-        {
-            Debug.Log("Setting shell pickup!");
+        {           
             shellGetCooldown = 4;
             if (shellsArray.Count == 0)
             {
@@ -49,27 +49,37 @@ public class ShellController : MonoBehaviour
                 Debug.Log("Adding shell 4");
                 shellPickedUp(shellObject4);
             }
+            else
+            {
+                Debug.Log("Cannot add shell!");
+            }
         }
     }
 
     public void shellPickedUp(GameObject shell)
-    {
-        Debug.Log("Picking up shell");        
-        if (shellsArray.Count == 0)
+    {                
+        if (this.shellsArray.Count == 0)
         {
+            Debug.Log("Picking up shell with count zero");
             //We don't have a shell yet so position it in a random rotation
             shell.transform.rotation = Quaternion.AngleAxis(Random.Range(0,360), Vector3.forward);
+            shell.transform.position = crabShellConnectionPoint.transform.position;
+            shell.transform.parent = crabShellConnectionPoint.transform;
             //GameObject newShell = Instantiate(shell, new Vector3(0, 0, 0), shell.transform.rotation);
             //Destroy the old shell
             //Destroy(shell);
-            //Add the new shell
-            shellsArray.Add(shell); 
+            //Add the new shell           
+            this.shellsArray.Add(shell); 
         }
         else if(shellsArray.Count < shellsAllowed)
         {
+            Debug.Log("Picking up shell with count non zero");
             //We don't have a shell yet so position it in a random rotation
             GameObject previousObject = (GameObject)shellsArray[shellsArray.Count - 1];
-            shell.transform.rotation = previousObject.transform.rotation *= Quaternion.Euler(0, 0, 90); ;
+            Quaternion previousRotation = previousObject.transform.rotation;
+            shell.transform.rotation = previousRotation *= Quaternion.Euler(0, 0, 90); ;
+            shell.transform.position = crabShellConnectionPoint.transform.position;
+            shell.transform.parent = crabShellConnectionPoint.transform;
             //GameObject newShell = Instantiate(shell, new Vector3(0, 0, 0), shell.transform.rotation);
             //Destroy the old shell
             //Destroy(shell);
