@@ -11,6 +11,13 @@ public class CrabController : MonoBehaviour
 
     Rigidbody2D Rigidbody2DRef;
 
+    ////////////////////////////////
+    // Movement related variables //
+    ////////////////////////////////
+
+    public float turnSpeed = 1.0f;
+    public float moveSpeed = 1.0f;
+
     ///////////
     // Setup //
     ///////////
@@ -30,6 +37,15 @@ public class CrabController : MonoBehaviour
     public void turnCrab(bool turnDirection)
     {
 
+        // Apply crab direction
+        float speedDirect = 1.0f;
+        if (turnDirection)
+        {
+            speedDirect *= -1.0f;
+        }
+
+        // Apply rotation
+        Rigidbody2DRef.MoveRotation(turnSpeed * speedDirect);
 
 
     }
@@ -37,7 +53,15 @@ public class CrabController : MonoBehaviour
     public void moveCrab(bool moveDirection)
     {
 
+        // Apply crab direction
+        float moveDirect = 1.0f;
+        if (moveDirection)
+        {
+            moveDirect *= -1.0f;
+        }
 
+        // Apply rotation
+        Rigidbody2DRef.MoveRotation(moveSpeed * moveDirect);
 
     }
 
