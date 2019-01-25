@@ -9,18 +9,15 @@ public class InputController : MonoBehaviour
     // References //
     ////////////////
 
-    CrabController CrabControllerRef = null;
+    CrabController[] CrabControllerRef;
 
     ///////////
     // Setup //
     ///////////
 
-    void Start()
+    public void SetupCrabs(CrabController[] Crabs)
     {
-
-        // Grab useful references
-        CrabControllerRef = GameObject.FindWithTag("crab").GetComponent<CrabController>();
-
+        CrabControllerRef = Crabs;
     }
 
     void Update()
@@ -29,25 +26,24 @@ public class InputController : MonoBehaviour
         // Detect player turn
         if (Input.GetKey(KeyCode.A))
         {
-            CrabControllerRef.turnCrab(false);
+            CrabControllerRef[0].turnCrab(false);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            CrabControllerRef.turnCrab(true);
+            CrabControllerRef[0].turnCrab(true);
         }
 
         // Detect player move
         if (Input.GetKey(KeyCode.W))
         {
-            CrabControllerRef.moveCrab(true);
+            CrabControllerRef[0].moveCrab(true);
 
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            CrabControllerRef.moveCrab(false);
+            CrabControllerRef[0].moveCrab(false);
         }
 
     }
-
 
 }

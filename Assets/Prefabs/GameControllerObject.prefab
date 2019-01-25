@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11fa8fd7b6524a428fb4d0e1dbd934a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CrabPrefab: {fileID: 1254873493704994, guid: 5e22ff1436c7ba34181470a3af8e9bb8, type: 3}
