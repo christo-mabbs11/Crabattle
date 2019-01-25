@@ -9,32 +9,43 @@ public class InputController : MonoBehaviour
     // References //
     ////////////////
 
-    CrabController CrabControllerRef;
+    CrabController CrabControllerRef = null;
 
     ///////////
     // Setup //
     ///////////
 
-    void Awake()
+    void Start()
     {
 
         // Grab useful references
-        // CrabControllerRef = this.GetComponent<Rigidbody2D>();
+        CrabControllerRef = GameObject.FindWithTag("crab").GetComponent<CrabController>();
 
     }
 
     void Update()
     {
 
-        // Detect player controls here (basic)
-        // if (Input.GetKey(KeyCode.A))
-        //     rb.AddForce(Vector3.left);
-        // if (Input.GetKey(KeyCode.D))
-        //     rb.AddForce(Vector3.right);
-        // if (Input.GetKey(KeyCode.W))
-        //     rb.AddForce(Vector3.up);
-        // if (Input.GetKey(KeyCode.S))
-        //     rb.AddForce(Vector3.down);
+        // Detect player turn
+        if (Input.GetKey(KeyCode.A))
+        {
+            CrabControllerRef.turnCrab(false);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            CrabControllerRef.turnCrab(true);
+        }
+
+        // Detect player move
+        if (Input.GetKey(KeyCode.W))
+        {
+            CrabControllerRef.moveCrab(true);
+
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            CrabControllerRef.moveCrab(false);
+        }
 
     }
 
