@@ -17,7 +17,11 @@ public class InputController : MonoBehaviour
 
     public void SetupCrabs(CrabController[] Crabs)
     {
+
         CrabControllerRef = Crabs;
+
+        Debug.Log(CrabControllerRef[0]);
+
     }
 
     void Update()
