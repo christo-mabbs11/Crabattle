@@ -6,12 +6,12 @@ public class CrabAIController : MonoBehaviour
 {
 
     //[HideInInspector]
-    public bool CrabAIEnabled = true;
+    private bool CrabAIEnabled = false;
     private CrabController crabController;
     enum AI_STATE { STATE_MOVE = 0, STATE_FIGHT = 1, STATE_DEAD = 2 };
     private AI_STATE aiState = AI_STATE.STATE_MOVE;
     private GameObject[] crabsToFight;
-    public float fightThreshold = 3;
+    public float fightThreshold = 3.0f;
 
     // Awake function gets a refernce to crab controller for controling the crab
     void Awake()
@@ -48,6 +48,7 @@ public class CrabAIController : MonoBehaviour
         // Make decisions if AI is running
         if (CrabAIEnabled)
         {
+
             //If we're dead then we're dead
             //If we are close to another crab then we're fighting
             //If we are set to move then look for the closest crab and move
@@ -55,6 +56,7 @@ public class CrabAIController : MonoBehaviour
             {
                 //Do nothing because we're dead
             }
+
             else if (aiState == AI_STATE.STATE_MOVE)
             {
                 //If we're close to a crab then change the state to fight
@@ -71,6 +73,8 @@ public class CrabAIController : MonoBehaviour
                     }
                 }
             }
+
+
             else if (aiState == AI_STATE.STATE_FIGHT)
             {
                 //If we're no longer close to a crab then change the state to move
@@ -88,6 +92,7 @@ public class CrabAIController : MonoBehaviour
                     }
                 }
             }
+
         }
 
     }
@@ -101,6 +106,9 @@ public class CrabAIController : MonoBehaviour
         // Complete actions if AI is running
         if (CrabAIEnabled)
         {
+
+            Debug.Log(aiState);
+
             //Debug.Log("Crab ai enabled YES");
             if (aiState == AI_STATE.STATE_MOVE)
             {
@@ -153,6 +161,24 @@ public class CrabAIController : MonoBehaviour
 
             }
         }
+
+    }
+
+    /////////////////////////
+    // Getters and setters //
+    /////////////////////////
+
+    public bool GetCrabAIEnabled()
+    {
+
+        return CrabAIEnabled;
+
+    }
+
+    public void SetCrabAIEnabled(bool argCrabEnabled)
+    {
+
+        CrabAIEnabled = argCrabEnabled;
 
     }
 

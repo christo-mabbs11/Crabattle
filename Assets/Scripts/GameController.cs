@@ -153,7 +153,7 @@ public class GameController : MonoBehaviour
         for (int i1 = 0; i1 < Crabs.Length; i1++)
         {
 
-            Crabs[i1].GetComponent<CrabAIController>().CrabAIEnabled = true;
+            Crabs[i1].GetComponent<CrabAIController>().SetCrabAIEnabled(true);
 
         }
 
