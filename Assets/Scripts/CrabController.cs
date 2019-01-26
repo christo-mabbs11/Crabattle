@@ -15,8 +15,8 @@ public class CrabController : MonoBehaviour
     // State related variables //
     /////////////////////////////
 
-    enum CRAB_STATE { STATE_PLAYERCONTROL = 0, STATE_AICONTROL = 2, STATE_DEAD = 1 };
-    private int CrabState = (int)CRAB_STATE.STATE_PLAYERCONTROL;
+    enum CRAB_STATE { STATE_MOVE = 0, STATE_FIGHT = 1, STATE_DEAD = 2 };
+    private int CrabState = (int)CRAB_STATE.STATE_MOVE;
 
     ////////////////////////////////
     // Movement related variables //
@@ -78,6 +78,22 @@ public class CrabController : MonoBehaviour
 
         // Apply rotation
         Rigidbody2DRef.MovePosition(Rigidbody2DRef.position + dir * moveSpeed * moveDirect * Time.fixedDeltaTime);
+
+    }
+
+    ///////////////////////////////
+    // Fighting related variables /
+    ///////////////////////////////
+
+    // Function to take damage
+    public void takeDamage(float argDMG)
+    {
+
+    }
+
+    // Function to give damage
+    public void sendDamage(CrabController argCrab)
+    {
 
     }
 

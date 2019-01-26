@@ -146,7 +146,16 @@ public class GameController : MonoBehaviour
         // Stop the player from controlling the crabs
         InputControllerRef.PlayerCanControlCrabs = false;
 
+        // Enable the AI controller on each crab to begin
+
     }
+
+    ///////////////////////////////////
+    // Fight state related variables //
+    ///////////////////////////////////
+
+    // Function for crabs to let the game controller know that they have died
+    // If all crabs die the game state is updated (and all crabs are cleaned up etc)
 
     //////////////////////////
     // UI related functions //
