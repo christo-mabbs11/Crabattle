@@ -10,6 +10,7 @@ public class CrabController : MonoBehaviour
     ////////////////
 
     Rigidbody2D Rigidbody2DRef;
+    GameController GameControllerRef;
 
     /////////////////////////////
     // State related variables //
@@ -31,6 +32,9 @@ public class CrabController : MonoBehaviour
 
     private float crabAttack = 5.0f;
     private float crabDefence = 20.0f;
+    private CrabController CurrentFightCrab;
+    private float CrabFightTimer = 0.0f;
+    private float CrabFightTime = 1.0f;
 
     ///////////
     // Setup //
@@ -41,6 +45,18 @@ public class CrabController : MonoBehaviour
 
         // Grab useful references
         Rigidbody2DRef = this.GetComponent<Rigidbody2D>();
+        GameControllerRef = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
+    }
+
+    void Update()
+    {
+
+        // If the crab is fighting, run the the fight functionality
+        if (CrabState == (int)CRAB_STATE.STATE_FIGHT)
+        {
+            RunCrabFight();
+        }
 
     }
 
@@ -85,16 +101,86 @@ public class CrabController : MonoBehaviour
     // Fighting related variables /
     ///////////////////////////////
 
-    // Function to take damage
-    public void takeDamage(float argDMG)
+    public void EnableFightMode(CrabController FightCrab)
     {
+
+        // If the crab is not dead
+        if (crabDefence > 0)
+        {
+
+            // Update the crab state
+            CrabState = (int)CRAB_STATE.STATE_FIGHT;
+
+            // Reset the fight timer
+            CrabFightTimer = 0.0f;
+
+            // Inidcate which crab is being fought
+            CurrentFightCrab = FightCrab;
+
+        }
 
     }
 
-    // Function to give damage
-    public void sendDamage(CrabController argCrab)
+    public void DisableFightMode()
     {
 
+        // If the crab has no HP
+        if (crabDefence <= 0)
+        {
+            CrabState = (int)CRAB_STATE.STATE_DEAD;
+        }
+        else
+        {
+            CrabState = (int)CRAB_STATE.STATE_MOVE;
+        }
+
+    }
+
+    // Function to take damage
+    private void takeDamage(float argDMG)
+    {
+
+        // Take this much damage 
+        crabDefence -= argDMG;
+
+        // If the health goes below 0
+        if (crabDefence <= 0)
+        {
+
+            // Indicate the crab is dead
+            CrabState = (int)CRAB_STATE.STATE_DEAD;
+
+            // Tell the game controller the crab has died
+            GameControllerRef.CrabHasDied();
+
+        }
+
+    }
+
+    private void RunCrabFight()
+    {
+
+        // Update the fight timer
+        CrabFightTimer += Time.deltaTime;
+
+        // If the crab is ready to arrack again
+        if (CrabFightTimer >= CrabFightTime)
+        {
+
+            // Reset the fight timer
+            CrabFightTimer = 0.0f;
+
+            // Apply this much damage to the other crab
+            CurrentFightCrab.takeDamage(crabAttack);
+
+        }
+
+    }
+
+    // Create function to let the AI know what the state of the Crab is
+    public int GetCrabMode()
+    {
+        return CrabState;
     }
 
 }
