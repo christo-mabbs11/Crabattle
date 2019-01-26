@@ -11,6 +11,13 @@ public class CrabController : MonoBehaviour
 
     Rigidbody2D Rigidbody2DRef;
 
+    /////////////////////////////
+    // State related variables //
+    /////////////////////////////
+
+    enum CRAB_STATE { STATE_PLAYERCONTROL = 0, STATE_AICONTROL = 2, STATE_DEAD = 1 };
+    private int CrabState = (int)CRAB_STATE.STATE_PLAYERCONTROL;
+
     ////////////////////////////////
     // Movement related variables //
     ////////////////////////////////
@@ -22,8 +29,8 @@ public class CrabController : MonoBehaviour
     // Fight related variables //
     /////////////////////////////
 
-    private float crabAttack = 40.0f;
-    private float crabDefence = 40.0f;
+    private float crabAttack = 5.0f;
+    private float crabDefence = 20.0f;
 
     ///////////
     // Setup //
