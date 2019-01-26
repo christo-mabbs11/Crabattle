@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 
     // Time for the countdown round, saved as seconds
     private float CountDownTimer = 0.0f;
-    private float CountDownTotalTime = 3.0f;
+    private float CountDownTotalTime = 30.0f;
 
     // Vairables related to the fight round
     private int DeadCrabs = 0;
