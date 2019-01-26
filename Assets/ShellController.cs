@@ -27,7 +27,7 @@ public class ShellController : MonoBehaviour
         //Debug.Log("Cooldown = "+shellGetCooldown);
         //shellGetCooldown = shellGetCooldown - Time.deltaTime;
         if (shellGetCooldown <= 0)
-        {           
+        {
             shellGetCooldown = 4;
             if (shellsArray.Count == 0)
             {
@@ -57,24 +57,24 @@ public class ShellController : MonoBehaviour
     }
 
     public void shellPickedUp(GameObject shell)
-    {                
+    {
         if (this.shellsArray.Count == 0)
-        {            
+        {
             //shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 10 + this.shellsArray.Count;
-            Debug.Log("Picking up shell with count zero");
+            // Debug.Log("Picking up shell with count zero");
             //We don't have a shell yet so position it in a random rotation
-            shell.transform.rotation = Quaternion.AngleAxis(Random.Range(0,360), Vector3.forward);
+            shell.transform.rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
             shell.transform.position = crabShellConnectionPoint.transform.position;
             shell.transform.parent = crabShellConnectionPoint.transform;
             //GameObject newShell = Instantiate(shell, new Vector3(0, 0, 0), shell.transform.rotation);
             //Destroy the old shell
             //Destroy(shell);
             //Add the new shell           
-            this.shellsArray.Add(shell); 
+            this.shellsArray.Add(shell);
         }
-        else if(shellsArray.Count < shellsAllowed)
+        else if (shellsArray.Count < shellsAllowed)
         {
-            Debug.Log("Picking up shell with count non zero");
+            // Debug.Log("Picking up shell with count non zero");
             //We don't have a shell yet so position it in a random rotation
             GameObject previousObject = (GameObject)shellsArray[shellsArray.Count - 1];
             Quaternion previousRotation = previousObject.transform.rotation;
@@ -89,14 +89,14 @@ public class ShellController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("OnCollisionEnter2D");
+        // Debug.Log("OnCollisionEnter2D");
         if (col.gameObject.tag.Equals("Shells"))
         {
             if (this.shellsArray.Count < shellsAllowed)
             {
-                Debug.Log("Touched a shell! ---------------------------------------------------------------");
+                // Debug.Log("Touched a shell! ---------------------------------------------------------------");
                 col.gameObject.tag = "Untagged";
                 col.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 gameObject.GetComponent<ShellController>().shellPickedUp(col.gameObject);
