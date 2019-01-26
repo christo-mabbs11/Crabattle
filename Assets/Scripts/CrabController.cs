@@ -22,8 +22,8 @@ public class CrabController : MonoBehaviour
     // Fight related variables //
     /////////////////////////////
 
-    private float crabAttack = 40.0f;
-    private float crabDefence = 40.0f;
+    private float crabAttack = 5.0f;
+    private float crabDefence = 20.0f;
 
     ///////////
     // Setup //
