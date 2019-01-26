@@ -46,6 +46,17 @@ public class CrabController : MonoBehaviour
 
     }
 
+    void Update()
+    {
+
+        // If the crab is fighting, run the the fight functionality
+        if (CrabState == (int)CRAB_STATE.STATE_FIGHT)
+        {
+
+        }
+
+    }
+
     ///////////////////
     // Crab movement //
     ///////////////////
@@ -87,8 +98,34 @@ public class CrabController : MonoBehaviour
     // Fighting related variables /
     ///////////////////////////////
 
+    public void EnableFightMode(CrabController FightCrab)
+    {
+
+        // Update the crab state
+        if (crabDefence > 0)
+        {
+            CrabState = (int)CRAB_STATE.STATE_FIGHT;
+        }
+
+    }
+
+    public void DisableFightMode()
+    {
+
+        // If the crab has no HP
+        if (crabDefence <= 0)
+        {
+            CrabState = (int)CRAB_STATE.STATE_DEAD;
+        }
+        else
+        {
+            CrabState = (int)CRAB_STATE.STATE_MOVE;
+        }
+
+    }
+
     // Function to take damage
-    public void takeDamage(float argDMG)
+    private void takeDamage(float argDMG)
     {
 
         // Take this much damage 
@@ -109,12 +146,18 @@ public class CrabController : MonoBehaviour
     }
 
     // Function to give damage
-    public void sendDamage(CrabController argCrab)
+    private void sendDamage(CrabController argCrab)
     {
 
         // Apply this much damage to the other crab
         argCrab.takeDamage(crabAttack);
 
+    }
+
+    // Create function to let the AI know what the state of the Crab is
+    public int GetCrabMode()
+    {
+        return CrabState;
     }
 
 }

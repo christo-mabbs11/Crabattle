@@ -170,8 +170,8 @@ public class GameController : MonoBehaviour
         // Indicate another crab has died
         DeadCrabs++;
 
-        // If all crabs die the game state is updated (and all crabs are cleaned up etc)
-        if (DeadCrabs >= Crabs.Length)
+        // If all but one (or more) crabs die the game state is updated (and all crabs are cleaned up etc)
+        if (DeadCrabs >= (Crabs.Length - 1))
         {
             EndFightRound();
         }
