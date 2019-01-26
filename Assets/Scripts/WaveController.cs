@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveController : MonoBehaviour
 {
     public GameObject wave;
+    public GameObject waveTop;
     public GameObject waveTopMarker;
     public GameObject waveBottomMarker;
     public float spawnWaveSpeed = 10;
@@ -93,10 +94,12 @@ public class WaveController : MonoBehaviour
     void spawnWave(float waveSpeed)
     {
         wave.transform.position = new Vector3(wave.transform.position.x, wave.transform.position.y + waveSpeed*Time.deltaTime, wave.transform.position.z);
+        waveTop.transform.position = new Vector3(waveTop.transform.position.x, waveTop.transform.position.y + waveSpeed * Time.deltaTime, waveTop.transform.position.z);
     }
 
     void despawnWave(float waveSpeed)
     {
         wave.transform.position = new Vector3(wave.transform.position.x, wave.transform.position.y - waveSpeed*Time.deltaTime, wave.transform.position.z);
+        waveTop.transform.position = new Vector3(waveTop.transform.position.x, waveTop.transform.position.y - waveSpeed * Time.deltaTime, waveTop.transform.position.z);
     }
 }

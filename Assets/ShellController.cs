@@ -66,6 +66,7 @@ public class ShellController : MonoBehaviour
             shell.transform.rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
             shell.transform.position = crabShellConnectionPoint.transform.position;
             shell.transform.parent = crabShellConnectionPoint.transform;
+            shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
             //GameObject newShell = Instantiate(shell, new Vector3(0, 0, 0), shell.transform.rotation);
             //Destroy the old shell
             //Destroy(shell);
@@ -81,11 +82,12 @@ public class ShellController : MonoBehaviour
             shell.transform.rotation = previousRotation *= Quaternion.Euler(0, 0, 90); ;
             shell.transform.position = crabShellConnectionPoint.transform.position;
             shell.transform.parent = crabShellConnectionPoint.transform;
+            shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
             //GameObject newShell = Instantiate(shell, new Vector3(0, 0, 0), shell.transform.rotation);
             //Destroy the old shell
             //Destroy(shell);
             //Add the new shell
-            shellsArray.Add(shell);
+            this.shellsArray.Add(shell);
         }
     }
 

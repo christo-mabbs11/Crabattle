@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnvironmentController : MonoBehaviour
 {
     public GameObject wave;
+    public GameObject waveTop;
     public GameObject shell;
 
     private ArrayList shellsArray;
