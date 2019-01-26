@@ -281,7 +281,7 @@ public class GameController : MonoBehaviour
 
     private void FightUI()
     {
-        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "FIGHT", GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.385f, Screen.height * 0.0f, 0.0f, 0.0f), "FIGHT", GeneralGUIStyle);
     }
 
 }
