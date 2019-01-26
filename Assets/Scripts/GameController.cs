@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
         // Setup intial game state on game start
         UpdateGameState();
 
-        TextColor = new Color(0.25f, 0.25f, 0.25f, 1.0f);
+        TextColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
         GeneralGUIStyle = new GUIStyle();
         GeneralGUIStyle.fontSize = (int)(Screen.width * 0.09f);
@@ -255,7 +255,7 @@ public class GameController : MonoBehaviour
 
     private void MenuUI()
     {
-        GUI.Label(new Rect(Screen.width * 0.18f, Screen.height * 0.1f, 0.0f, 0.0f), "BATTLE HERMITS", GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.18f, Screen.height * 0.03f, 0.0f, 0.0f), "BATTLE HERMITS", GeneralGUIStyle);
         GUI.Label(new Rect(Screen.width * 0.3f, Screen.height * 0.25f, 0.0f, 0.0f), "BASED ON TRUE EVENTS", GeneralGUIStyle_medium);
         GUI.Label(new Rect(Screen.width * 0.32f, Screen.height * 0.9f, 0.0f, 0.0f), "(PRESS SPACE TO START)", GeneralGUIStyle_smaller);
     }

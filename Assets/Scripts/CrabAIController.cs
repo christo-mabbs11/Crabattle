@@ -155,8 +155,6 @@ public class CrabAIController : MonoBehaviour
                         // Calculate the angles of the crab going left and right
                         float CrabTurnInfo = convertAngle360(currentCrabAngle - closestCrabAngle);
 
-                        // Debug.Log(CrabID + ": " + CrabTurnInfo);
-
                         // Turn the crab based on what size is closer
                         if (CrabTurnInfo > 90.0f && CrabTurnInfo <= 270.0f)
                         {
@@ -173,14 +171,10 @@ public class CrabAIController : MonoBehaviour
                             {
                                 crabController.turnCrab(true);
 
-                                // Debug.Log(CrabID + ", 1");
-
                             }
                             else
                             {
                                 crabController.turnCrab(false);
-
-                                // Debug.Log(CrabID + ", 2");
 
                             }
                             // }
@@ -202,14 +196,10 @@ public class CrabAIController : MonoBehaviour
                             {
                                 crabController.turnCrab(false);
 
-                                Debug.Log(CrabID + ", 3");
-
                             }
                             else
                             {
                                 crabController.turnCrab(true);
-
-                                // Debug.Log(CrabID + ", 4");
 
                             }
                             // }
