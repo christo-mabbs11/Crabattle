@@ -88,4 +88,19 @@ public class ShellController : MonoBehaviour
             shellsArray.Add(shell);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("OnCollisionEnter2D");
+        if (col.gameObject.tag.Equals("Shells"))
+        {
+            if (this.shellsArray.Count < shellsAllowed)
+            {
+                Debug.Log("Touched a shell! ---------------------------------------------------------------");
+                col.gameObject.tag = "Untagged";
+                col.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                gameObject.GetComponent<ShellController>().shellPickedUp(col.gameObject);
+            }
+        }
+    }
 }
