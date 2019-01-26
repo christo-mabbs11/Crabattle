@@ -11,7 +11,7 @@ public class CrabAIController : MonoBehaviour
     enum AI_STATE { STATE_MOVE = 0, STATE_FIGHT = 1, STATE_DEAD = 2 };
     private AI_STATE aiState = AI_STATE.STATE_MOVE;
     private GameObject[] crabsToFight;
-    private float fightThreshold = 1.0f;
+    private float fightThreshold = 1.2f;
 
     GameObject closestCrab = null;
 

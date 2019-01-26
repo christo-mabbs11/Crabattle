@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 6207684412564387184}
   - component: {fileID: 8237062728280685306}
   - component: {fileID: 6367408491676037359}
+  - component: {fileID: 6475516638967053321}
   m_Layer: 0
   m_Name: FinalCrab
   m_TagString: crab
@@ -118,7 +119,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648719114679719506}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -208,6 +209,22 @@ MonoBehaviour:
   audioSos: {fileID: 0}
   audioRain: {fileID: 0}
   audioBell: {fileID: 0}
+--- !u!58 &6475516638967053321
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648719114679719506}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.53
 --- !u!1 &1648719115919921843
 GameObject:
   m_ObjectHideFlags: 0
