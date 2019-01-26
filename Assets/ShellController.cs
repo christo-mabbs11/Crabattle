@@ -25,7 +25,7 @@ public class ShellController : MonoBehaviour
     void Update()
     {
         //Debug.Log("Cooldown = "+shellGetCooldown);
-        shellGetCooldown = shellGetCooldown - Time.deltaTime;
+        //shellGetCooldown = shellGetCooldown - Time.deltaTime;
         if (shellGetCooldown <= 0)
         {           
             shellGetCooldown = 4;
@@ -59,7 +59,8 @@ public class ShellController : MonoBehaviour
     public void shellPickedUp(GameObject shell)
     {                
         if (this.shellsArray.Count == 0)
-        {
+        {            
+            //shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 10 + this.shellsArray.Count;
             Debug.Log("Picking up shell with count zero");
             //We don't have a shell yet so position it in a random rotation
             shell.transform.rotation = Quaternion.AngleAxis(Random.Range(0,360), Vector3.forward);

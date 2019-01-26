@@ -40,7 +40,7 @@ public class WaveController : MonoBehaviour
          */
         if (waveAlive)
         {      
-            Debug.Log("Wave Alive");
+            //Debug.Log("Wave Alive");
             //If we get to the top of the screen and then we should reverse the wave direction            
             if (wave.transform.position.y >= waveTopMarker.transform.position.y && wavePauseCountdown > 0)
             {
@@ -71,14 +71,14 @@ public class WaveController : MonoBehaviour
         {
             if (waveSpawnCountdown <= 0)
             {
-                Debug.Log("Wave Dead");
+                //Debug.Log("Wave Dead");
                 waveAlive = true;
                 waveSpawnCountdown = newWaveSpawnTime();
                 wave.transform.position = new Vector3(wave.transform.position.x, waveBottomMarker.transform.position.y + 0.1f, wave.transform.position.z);
             }
             else
             {
-                Debug.Log("Wave spawn countdown = "+waveSpawnCountdown);
+                //Debug.Log("Wave spawn countdown = "+waveSpawnCountdown);
                 waveSpawnCountdown = waveSpawnCountdown - Time.deltaTime;
             }
             
