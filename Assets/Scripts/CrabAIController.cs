@@ -169,20 +169,29 @@ public class CrabAIController : MonoBehaviour
                     // }
 
                     // If there is a great enough difference between the angles
-                    if (Mathf.Abs(CrabRightAngle - CrabLeftAngle) > 10.0f)
+                    // if (convertAngle360(CrabRightAngle - CrabLeftAngle) > 5.0f)
+                    // {
+                    // Determine if it is faster to go left or right
+                    if (CrabLeftAngle > CrabRightAngle)
                     {
-                        // Determine if it is faster to go left or right
-                        if (CrabLeftAngle > CrabRightAngle)
+                        if (CrabRightAngle > 90.0f)
                         {
                             crabController.turnCrab(false);
-                            crabController.moveCrab(false);
                         }
-                        else if (CrabLeftAngle < CrabRightAngle)
+                        else
                         {
                             crabController.turnCrab(true);
-                            crabController.moveCrab(false);
                         }
+                        Debug.Log("hit a");
+                        // crabController.moveCrab(false);
                     }
+                    else if (CrabLeftAngle < CrabRightAngle)
+                    {
+                        // crabController.turnCrab(true);
+                        // Debug.Log("hit b");
+                        // crabController.moveCrab(false);
+                    }
+                    // }
                 }
             }
             else if (aiState == AI_STATE.STATE_FIGHT)
