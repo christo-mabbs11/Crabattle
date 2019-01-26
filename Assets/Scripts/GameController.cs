@@ -191,13 +191,17 @@ public class GameController : MonoBehaviour
         // Room for embelishment, title screens, etc here..
         //
 
+        Debug.Log("enndddd drouuunndndd 1");
+
         // Delete all the crabs
         for (int i1 = 0; i1 < Crabs.Length; i1++)
         {
 
-            Destroy(Crabs[i1]);
+            // Destroy(Crabs[i1]);
 
         }
+
+        Debug.Log("enndddd drouuunndndd 2");
 
         // Go back to the menu scene
         UpdateGameState();
@@ -230,7 +234,7 @@ public class GameController : MonoBehaviour
 
     private void MenuUI()
     {
-
+        // 
     }
 
     private void CountDownUI()
@@ -246,7 +250,7 @@ public class GameController : MonoBehaviour
 
     private void FightUI()
     {
-
+        // 
     }
 
 }
