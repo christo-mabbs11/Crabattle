@@ -62,7 +62,8 @@ public class EnvironmentController : MonoBehaviour
             //GameObject shellClone = Instantiate((GameObject)this.shellsToSpawn[Random.Range(0, this.shellsToSpawn.Length)], new Vector3(Random.Range(bottomRightCorner.x, topLeftCorner.x), Random.Range(bottomRightCorner.y, topLeftCorner.y), 0), Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward));
             GameObject shellClone = Instantiate((GameObject)this.shellsToSpawn[Random.Range(0, this.shellsToSpawn.Length)], new Vector3(Random.Range(bottomRightCorner.x, topLeftCorner.x), Random.Range(bottomRightCorner.y, topLeftCorner.y), 0), Quaternion.identity);
             //Change scale randomlly
-            shellClone.transform.localScale = new Vector3(Random.Range(0.8f, 1.2f), Random.Range(0.8f, 1.2f), Random.Range(0.8f, 1.2f));
+            float randomNumber = Random.Range(0.85f, 1.15f);
+            shellClone.transform.localScale = new Vector3(randomNumber, randomNumber, randomNumber);
             shellsArray.Add(shellClone);
         }
     }
