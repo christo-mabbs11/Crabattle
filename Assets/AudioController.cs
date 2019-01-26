@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    public AudioClip clipBird;
+    public AudioClip clipScuttle;
     public AudioClip clipSpace;
     public AudioClip clipSos;
     public AudioClip clipRain;
     public AudioClip clipBell;
 
-    private AudioSource audioBird;
-    private AudioSource audioSpace;
-    private AudioSource audioSos;
-    private AudioSource audioRain;
-    private AudioSource audioBell;
+    [HideInInspector]
+    public AudioSource audioScuttle;
+    [HideInInspector]
+    public AudioSource audioSpace;
+    [HideInInspector]
+    public AudioSource audioSos;
+    [HideInInspector]
+    public AudioSource audioRain;
+    [HideInInspector]
+    public AudioSource audioBell;
 
 
     private float countdown = 5.0f;
@@ -38,19 +43,22 @@ public class AudioController : MonoBehaviour
 
 // Update is called once per frame
     void Update()
-    {        
+    {
+        /*
         countdown = countdown - Time.deltaTime;
         if (countdown < 0 && playedaudio == false)
         {
-            Debug.Log("Play bird");
-            audioBird.Play();
+            Debug.Log("Play Scuttle");
+            audioScuttle.Play();
             playedaudio = true;
         }
-    }
+        */
+        Debug.Log("Scuttle playing = "+audioScuttle.isPlaying);
+    }    
 
     private void Awake()
     {
-        audioBird = addAudio(clipBird, false, false, 1.0f);
+        audioScuttle = addAudio(clipScuttle, true, false, 1.0f);
         audioSpace = addAudio(clipSpace, false, false, 1.0f);
         audioSos = addAudio(clipSos, false, false, 1.0f);
         audioRain = addAudio(clipRain, false, false, 1.0f);

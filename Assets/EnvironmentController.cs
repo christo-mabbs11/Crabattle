@@ -44,9 +44,12 @@ public class EnvironmentController : MonoBehaviour
         foreach (GameObject oldShell in shellsArray)
         {
             // Debug.Log("Destroying Shell!");
-            if (oldShell.tag.Equals("Shells"))
+            if (oldShell != null)
             {
-                Destroy(oldShell);
+                if (oldShell.tag.Equals("Shells"))
+                {
+                    Destroy(oldShell);
+                }
             }
         }
 

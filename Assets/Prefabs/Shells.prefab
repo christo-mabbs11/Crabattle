@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338949b7c9b2d1440acdd2996f5a30da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
-  attackDamage: 5
+  movementSpeed: 0.5
+  attackDamage: 1
   defencePoints: 20
 --- !u!1 &2662364039226270638
 GameObject:
@@ -303,9 +303,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338949b7c9b2d1440acdd2996f5a30da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
-  attackDamage: 5
-  defencePoints: 20
+  movementSpeed: 0.5
+  attackDamage: 15
+  defencePoints: -10
 --- !u!1 &3770902529126368747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,9 +1108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338949b7c9b2d1440acdd2996f5a30da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
-  attackDamage: 5
-  defencePoints: 20
+  movementSpeed: 0.5
+  attackDamage: 10
+  defencePoints: 5
 --- !u!1 &5994775095667974970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,9 +1319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338949b7c9b2d1440acdd2996f5a30da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
-  attackDamage: 5
-  defencePoints: 20
+  movementSpeed: -0.5
+  attackDamage: 0
+  defencePoints: 40
 --- !u!1 &8549466415775277920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,9 +1414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338949b7c9b2d1440acdd2996f5a30da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  movementSpeed: 2
   attackDamage: 5
-  defencePoints: 20
+  defencePoints: 10
 --- !u!1 &8590641754787030437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,9 +1509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338949b7c9b2d1440acdd2996f5a30da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  movementSpeed: 2
   attackDamage: 5
-  defencePoints: 20
+  defencePoints: 10
 --- !u!1 &8729337252439986224
 GameObject:
   m_ObjectHideFlags: 0

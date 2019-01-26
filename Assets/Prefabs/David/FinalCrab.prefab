@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 1648719114679719511}
   - component: {fileID: 6207684412564387184}
   - component: {fileID: 8237062728280685306}
+  - component: {fileID: 6367408491676037359}
   m_Layer: 0
   m_Name: FinalCrab
   m_TagString: crab
@@ -182,6 +183,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e83327c7f1d3341ae20ec52a6b408c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 1
+  crabAttack: 5
+  crabDefence: 20
+--- !u!114 &6367408491676037359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648719114679719506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9cef6aaf22a2442a1e6b48887227bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipScuttle: {fileID: 8300000, guid: c9f40a7123846534c92d58764b9a8b4e, type: 3}
+  clipSpace: {fileID: 0}
+  clipSos: {fileID: 0}
+  clipRain: {fileID: 0}
+  clipBell: {fileID: 0}
+  audioScuttle: {fileID: 0}
+  audioSpace: {fileID: 0}
+  audioSos: {fileID: 0}
+  audioRain: {fileID: 0}
+  audioBell: {fileID: 0}
 --- !u!1 &1648719115919921843
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class CrabController : MonoBehaviour
 
     Rigidbody2D Rigidbody2DRef;
     GameController GameControllerRef;
+    AudioController audioController;
 
     /////////////////////////////
     // State related variables //
@@ -24,14 +25,14 @@ public class CrabController : MonoBehaviour
     ////////////////////////////////
 
     private float turnSpeed = 65.0f;
-    private float moveSpeed = 1.0f;
+    public float moveSpeed = 1.0f;
 
     /////////////////////////////
     // Fight related variables //
     /////////////////////////////
 
-    private float crabAttack = 5.0f;
-    private float crabDefence = 20.0f;
+    public float crabAttack = 5.0f;
+    public float crabDefence = 20.0f;
     private CrabController CurrentFightCrab;
     private float CrabFightTimer = 0.0f;
     private float CrabFightTime = 1.0f;
@@ -53,6 +54,7 @@ public class CrabController : MonoBehaviour
         Rigidbody2DRef = this.GetComponent<Rigidbody2D>();
         GameControllerRef = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         SpriteRendererRef = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+        audioController = this.gameObject.GetComponent<AudioController>();
 
     }
 
@@ -89,7 +91,12 @@ public class CrabController : MonoBehaviour
 
     public void moveCrab(bool moveDirection)
     {
-
+        //Debug.Log("Play Audio");
+        if (!audioController.audioScuttle.isPlaying)
+        {
+            Debug.Log("Start Audio");
+            audioController.audioScuttle.Play();
+        }
         Vector2 dir = (Vector2)(Quaternion.Euler(0, 0, Rigidbody2DRef.rotation) * Vector2.right);
 
         // Apply crab direction
