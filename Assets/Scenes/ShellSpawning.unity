@@ -218,8 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904334f2afc7935478d558f6e00319c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrabAIEnabled: 1
-  fightThreshold: 3
+  CrabID: -1
 --- !u!50 &44477527
 Rigidbody2D:
   serializedVersion: 4
@@ -605,6 +604,7 @@ GameObject:
   - component: {fileID: 1414710532}
   - component: {fileID: 1414710534}
   - component: {fileID: 1414710533}
+  - component: {fileID: 1414710535}
   m_Layer: 0
   m_Name: ShellCollectionTest
   m_TagString: Untagged
@@ -716,6 +716,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &1414710535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414710528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9cef6aaf22a2442a1e6b48887227bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipBird: {fileID: 8300000, guid: db4743a56f0a0bb4096445da0adc0421, type: 3}
+  clipSpace: {fileID: 8300000, guid: ff8821ebcf2241c4c847274980ec6a5b, type: 3}
+  clipSos: {fileID: 8300000, guid: 63a5a7e201d044745a790b5b017c3fb7, type: 3}
+  clipRain: {fileID: 8300000, guid: ae847d71cd1091a4eb638132dce52cb9, type: 3}
+  clipBell: {fileID: 8300000, guid: 3a9c0a604a0521f448f29e4d22bc4c97, type: 3}
 --- !u!1 &1476182661 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3770902531199794090, guid: 96a61c2b149c64143bb61c924c0e211d,
@@ -959,8 +976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904334f2afc7935478d558f6e00319c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrabAIEnabled: 1
-  fightThreshold: 3
+  CrabID: -1
 --- !u!50 &1853216336
 Rigidbody2D:
   serializedVersion: 4
