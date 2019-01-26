@@ -19,6 +19,11 @@ public class GameController : MonoBehaviour
     // Vairables related to the fight round
     private int DeadCrabs = 0;
 
+    // Final game counter vars
+    private bool FinalGameCountDownEnabled = false;
+    private float FinalGameCountDownTimer = 0.0f;
+    private float FinalGameCountDownTime = 4.0f;
+
     // GUI biz
     GUIStyle GeneralGUIStyle, GeneralGUIStyle_medium, GeneralGUIStyle_smaller, GeneralGUIStyle_xsmaller, GeneralGUIStyle_xxsmaller, GeneralGUIStyle_outline, GeneralGUIStyle_medium_outline, GeneralGUIStyle_smaller_outline;
     Color TextColor;
@@ -100,6 +105,27 @@ public class GameController : MonoBehaviour
                 // Update the game state (start the fight!!)
                 UpdateGameState();
 
+            }
+
+        }
+        else if (GameState == (int)GAME_STATE.STATE_FIGHT)
+        {
+
+            if (FinalGameCountDownEnabled)
+            {
+                FinalGameCountDownTimer += Time.deltaTime;
+
+                if (FinalGameCountDownTimer > FinalGameCountDownTime)
+                {
+
+                    // Reset the timers
+                    FinalGameCountDownEnabled = false;
+                    FinalGameCountDownTimer = 0.0f;
+
+                    // End the round
+                    EndFightRound();
+
+                }
             }
 
         }
@@ -211,16 +237,13 @@ public class GameController : MonoBehaviour
         // If all but one (or more) crabs die the game state is updated (and all crabs are cleaned up etc)
         if (DeadCrabs >= (Crabs.Length - 1))
         {
-            EndFightRound();
+            FinalGameCountDownEnabled = true;
         }
 
     }
 
     private void EndFightRound()
     {
-
-        // Room for embelishment, title screens, etc here..
-        //
 
         // Delete all the crabs
         for (int i1 = 0; i1 < Crabs.Length; i1++)
