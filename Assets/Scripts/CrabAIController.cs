@@ -95,6 +95,9 @@ public class CrabAIController : MonoBehaviour
                     if (Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) <= fightThreshold)
                     {
                         aiState = AI_STATE.STATE_FIGHT;
+
+                        // Put crab into fight mode
+                        crabController.EnableFightMode(closestCrab.GetComponent<CrabController>());
                     }
                 }
             }
@@ -108,8 +111,10 @@ public class CrabAIController : MonoBehaviour
                 {
                     if (Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) > fightThreshold)
                     {
-                        Debug.Log("Into move mode from fight");
                         aiState = AI_STATE.STATE_MOVE;
+
+                        // Get crab out of fight mode
+                        crabController.DisableFightMode();
                     }
                 }
             }
@@ -118,9 +123,6 @@ public class CrabAIController : MonoBehaviour
 
     }
 
-    // Update function runs crab decision on eveyr frame, can:
-    // Move & Turn
-    // Fight
     void Update()
     {
 
@@ -201,10 +203,6 @@ public class CrabAIController : MonoBehaviour
                     }
 
                 }
-
-            }
-            else if (aiState == AI_STATE.STATE_FIGHT)
-            {
 
             }
         }
