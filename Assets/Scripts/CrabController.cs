@@ -60,7 +60,7 @@ public class CrabController : MonoBehaviour
 
     void Update()
     {
-
+        turnSpeed = moveSpeed * 65;
         // If the crab is fighting, run the the fight functionality
         if (CrabState == (int)CRAB_STATE.STATE_FIGHT)
         {
