@@ -59,7 +59,14 @@ public class CrabAIController : MonoBehaviour
         if (CrabAIEnabled)
         {
 
-            if (aiState == AI_STATE.STATE_MOVE)
+            //If we're dead then we're dead
+            //If we are close to another crab then we're fighting
+            //If we are set to move then look for the closest crab and move
+            if (aiState == AI_STATE.STATE_DEAD)
+            {
+                //Do nothing because we're dead
+            }
+            else if (aiState == AI_STATE.STATE_MOVE)
             {
 
                 // Get the closest crab and move towards it
@@ -68,7 +75,7 @@ public class CrabAIController : MonoBehaviour
                 {
 
                     // If the crab is not dead
-                    if (crabObject.GetComponent<CrabController>().GetCrabMode() != 2)
+                    if (crabObject.GetComponent<CrabAIController>().aiState != AI_STATE.STATE_DEAD)
                     {
 
                         // Get the distance to this crab
@@ -81,13 +88,16 @@ public class CrabAIController : MonoBehaviour
                 }
 
                 // If we're close to a crab then change the state to fight
-                if (Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) <= fightThreshold)
+                if (closestCrab.GetComponent<CrabAIController>().aiState != AI_STATE.STATE_DEAD)
                 {
-                    // Indicate we're in fight mode
-                    aiState = AI_STATE.STATE_FIGHT;
+                    if (Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) <= fightThreshold)
+                    {
+                        // Indicate we're in fight mode
+                        aiState = AI_STATE.STATE_FIGHT;
 
-                    // Put crab into fight mode
-                    crabController.EnableFightMode(closestCrab.GetComponent<CrabController>());
+                        // Put crab into fight mode
+                        crabController.EnableFightMode(closestCrab.GetComponent<CrabController>());
+                    }
                 }
             }
 
@@ -95,27 +105,15 @@ public class CrabAIController : MonoBehaviour
             else if (aiState == AI_STATE.STATE_FIGHT)
             {
 
-                // If there is no closest crab (debug checker, should not occur)
-                if (closestCrab == null)
+                // If we're no longer close to a crab or the closest crab is dead then change the state to move
+                if (closestCrab.GetComponent<CrabAIController>().aiState == AI_STATE.STATE_DEAD || Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) > fightThreshold)
                 {
-                    // Go into move mode
+                    // Indicate we're in move mode
                     aiState = AI_STATE.STATE_MOVE;
-                }
 
-                // Otheriwise..
-                else
-                {
+                    // Get crab out of fight mode
+                    crabController.DisableFightMode();
 
-                    // If we're no longer close to a crab or the closest crab is dead then change the state to move
-                    if (closestCrab.GetComponent<CrabController>().GetCrabMode() == 2 || Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) > fightThreshold)
-                    {
-                        // Indicate we're in move mode
-                        aiState = AI_STATE.STATE_MOVE;
-
-                        // Get crab out of fight mode
-                        crabController.DisableFightMode();
-
-                    }
                 }
             }
 
@@ -137,71 +135,67 @@ public class CrabAIController : MonoBehaviour
                 if (closestCrab != null)
                 {
 
-                    // If the closest crab is not dead
-                    if (closestCrab.GetComponent<CrabController>().GetCrabMode() != 2)
+                    // Find the current angle of the crab
+                    float currentCrabAngle = transform.rotation.eulerAngles.z;
+
+                    // find the angle to the clostest crab
+                    Vector3 myVector = closestCrab.transform.position - transform.position;
+                    float closestCrabAngle = Mathf.Atan2(myVector.y, myVector.x) * 180 / Mathf.PI;
+
+                    // Adjust the angles to be within the realms of 360 degrees
+                    currentCrabAngle = convertAngle360(currentCrabAngle);
+                    closestCrabAngle = convertAngle360(closestCrabAngle);
+
+                    // Calculate the angles of the crab going left and right
+                    float CrabTurnInfo = convertAngle360(currentCrabAngle - closestCrabAngle);
+
+                    // Stop the crab shakes (only if the angle is signifcant enough)
+
+                    // Turn the crab based on what size is closer
+                    if (CrabTurnInfo > 90.0f && CrabTurnInfo <= 270.0f)
                     {
 
-                        // Find the current angle of the crab
-                        float currentCrabAngle = transform.rotation.eulerAngles.z;
+                        // Move the crab
+                        crabController.moveCrab(true);
 
-                        // find the angle to the clostest crab
-                        Vector3 myVector = closestCrab.transform.position - transform.position;
-                        float closestCrabAngle = Mathf.Atan2(myVector.y, myVector.x) * 180 / Mathf.PI;
-
-                        // Adjust the angles to be within the realms of 360 degrees
-                        currentCrabAngle = convertAngle360(currentCrabAngle);
-                        closestCrabAngle = convertAngle360(closestCrabAngle);
-
-                        // Calculate the angles of the crab going left and right
-                        float CrabTurnInfo = convertAngle360(currentCrabAngle - closestCrabAngle);
-
-                        // Turn the crab based on what size is closer
-                        if (CrabTurnInfo > 90.0f && CrabTurnInfo <= 270.0f)
+                        // Turn the crab if they need to
+                        if ((CrabTurnInfo > 175.0f && CrabTurnInfo < 185.0f))
                         {
 
-                            // Move the crab
-                            crabController.moveCrab(true);
-
-                            // Turn the crab if they need to
-                            if ((CrabTurnInfo >= 178.0f && CrabTurnInfo <= 182.0f))
+                            if (CrabTurnInfo > 180.0f)
                             {
+                                crabController.turnCrab(true);
 
-                                if (CrabTurnInfo >= 180.0f)
-                                {
-                                    crabController.turnCrab(true);
-
-                                }
-                                else
-                                {
-                                    crabController.turnCrab(false);
-
-                                }
                             }
+                            else
+                            {
+                                crabController.turnCrab(false);
 
-
+                            }
                         }
-                        else
+
+
+                    }
+                    else
+                    {
+
+                        // Move the crab regardless
+                        crabController.moveCrab(false);
+
+                        // Turn the crab if they need to
+                        if (CrabTurnInfo < 5.0f || CrabTurnInfo < 355.0f)
                         {
 
-                            // Move the crab regardless
-                            crabController.moveCrab(false);
-
-                            // Turn the crab if they need to
-                            if (CrabTurnInfo <= 2.0f || CrabTurnInfo <= 358.0f)
+                            if (CrabTurnInfo > 180.0f)
                             {
+                                crabController.turnCrab(false);
 
-                                if (CrabTurnInfo >= 180.0f)
-                                {
-                                    crabController.turnCrab(false);
-
-                                }
-                                else
-                                {
-                                    crabController.turnCrab(true);
-
-                                }
                             }
+                            else
+                            {
+                                crabController.turnCrab(true);
 
+                            }
                         }
 
                     }
@@ -252,7 +246,6 @@ public class CrabAIController : MonoBehaviour
     public void KillCrabAI()
     {
         aiState = AI_STATE.STATE_DEAD;
-        CrabAIEnabled = false;
     }
 
 }
