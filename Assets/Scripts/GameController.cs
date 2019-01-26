@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
     // Vairables related to the fight round
     private int DeadCrabs = 0;
 
+    GUIStyle GeneralGUIStyle;
+
     ////////////////
     // References //
     ////////////////
@@ -36,6 +38,11 @@ public class GameController : MonoBehaviour
 
         // Setup intial game state on game start
         UpdateGameState();
+
+        GeneralGUIStyle = new GUIStyle();
+        GeneralGUIStyle.fontSize = (int)(Screen.width * 0.045f);
+        GeneralGUIStyle.normal.textColor = Color.white;
+        GeneralGUIStyle.font = (Font)Resources.Load<Font>("Fonts/playtime");
     }
 
     void Update()
@@ -230,7 +237,8 @@ public class GameController : MonoBehaviour
 
     private void MenuUI()
     {
-        // 
+        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "BASED ON A TRUE STORY", GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "(PRESS SPACE TO START)", GeneralGUIStyle);
     }
 
     private void CountDownUI()
@@ -239,14 +247,17 @@ public class GameController : MonoBehaviour
         // Print the timer
         int timeInt = (int)Mathf.Round(CountDownTotalTime - CountDownTimer);    // Get the remaining time as an int
         string timeString = timeInt.ToString(); // Convert remaning time to string
-        GUI.Label(new Rect(10, 10, 100, 20), timeString);   // Print string as GUI object
+
+        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), timeString, GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "COLLECT THE SHELLS", GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "BUILD YOUR HOME", GeneralGUIStyle);
 
 
     }
 
     private void FightUI()
     {
-        // 
+        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "FIGHT", GeneralGUIStyle);
     }
 
 }
