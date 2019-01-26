@@ -104,9 +104,9 @@ public class CrabController : MonoBehaviour
 
     }
 
-    ///////////////////////////////
-    // Fighting related variables /
-    ///////////////////////////////
+    ////////////////////////////////
+    // Fighting related variables //
+    ////////////////////////////////
 
     public void EnableFightMode(CrabController FightCrab)
     {

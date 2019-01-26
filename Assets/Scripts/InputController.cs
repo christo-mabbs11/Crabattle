@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Air controller
-using NDream.AirConsole;
-using Newtonsoft.Json.Linq;
-
 public class InputController : MonoBehaviour
 {
 
@@ -26,10 +22,6 @@ public class InputController : MonoBehaviour
     // Setup //
     ///////////
 
-    void Start()
-    {
-        AirConsole.instance.onMessage += OnMessage;
-    }
 
     public void SetupCrabs(CrabController[] Crabs)
     {
@@ -147,15 +139,6 @@ public class InputController : MonoBehaviour
             }
         }
 
-    }
-
-    ///////////////////////////////////
-    // Air control related funcitons //
-    ///////////////////////////////////
-
-    void OnMessage(int from, JToken data)
-    {
-        AirConsole.instance.Message(from, "Full of pixels!");
     }
 
 }
