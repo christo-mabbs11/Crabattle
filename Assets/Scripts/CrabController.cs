@@ -163,7 +163,9 @@ public class CrabController : MonoBehaviour
             // Tell the game controller the crab has died
             GameControllerRef.CrabHasDied();
 
-            // SpriteRendererRef.enabled = false;
+            // Just here david
+            // Debug
+            SpriteRendererRef.enabled = false;
 
         }
 

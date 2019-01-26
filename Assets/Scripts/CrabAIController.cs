@@ -155,8 +155,7 @@ public class CrabAIController : MonoBehaviour
                         // Calculate the angles of the crab going left and right
                         float CrabTurnInfo = convertAngle360(currentCrabAngle - closestCrabAngle);
 
-                        // Debug.Log(CrabTurnInfo);
-                        // return;
+                        // Debug.Log(CrabID + ": " + CrabTurnInfo);
 
                         // Turn the crab based on what size is closer
                         if (CrabTurnInfo > 90.0f && CrabTurnInfo <= 270.0f)
@@ -166,24 +165,25 @@ public class CrabAIController : MonoBehaviour
                             crabController.moveCrab(true);
 
                             // Turn the crab if they need to
-                            if ((CrabTurnInfo >= 178.0f && CrabTurnInfo <= 182.0f))
+                            // This is potentially buggy
+                            // if ((CrabTurnInfo >= 178.0f && CrabTurnInfo <= 182.0f))
+                            // {
+
+                            if (CrabTurnInfo >= 180.0f)
                             {
+                                crabController.turnCrab(true);
 
-                                if (CrabTurnInfo >= 180.0f)
-                                {
-                                    crabController.turnCrab(true);
+                                // Debug.Log(CrabID + ", 1");
 
-                                    Debug.Log(CrabID + ", 1");
-
-                                }
-                                else
-                                {
-                                    crabController.turnCrab(false);
-
-                                    Debug.Log(CrabID + ", 2");
-
-                                }
                             }
+                            else
+                            {
+                                crabController.turnCrab(false);
+
+                                // Debug.Log(CrabID + ", 2");
+
+                            }
+                            // }
 
 
                         }
@@ -194,24 +194,25 @@ public class CrabAIController : MonoBehaviour
                             crabController.moveCrab(false);
 
                             // Turn the crab if they need to
-                            if (CrabTurnInfo <= 2.0f || CrabTurnInfo <= 358.0f)
+                            // This is potentially buggy
+                            // if (CrabTurnInfo <= 2.0f || CrabTurnInfo <= 358.0f)
+                            // {
+
+                            if (CrabTurnInfo >= 180.0f)
                             {
+                                crabController.turnCrab(false);
 
-                                if (CrabTurnInfo >= 180.0f)
-                                {
-                                    crabController.turnCrab(false);
+                                Debug.Log(CrabID + ", 3");
 
-                                    Debug.Log(CrabID + ", 3");
-
-                                }
-                                else
-                                {
-                                    crabController.turnCrab(true);
-
-                                    Debug.Log(CrabID + ", 4");
-
-                                }
                             }
+                            else
+                            {
+                                crabController.turnCrab(true);
+
+                                // Debug.Log(CrabID + ", 4");
+
+                            }
+                            // }
 
                         }
 
