@@ -118,9 +118,7 @@ public class GameController : MonoBehaviour
                 if (FinalGameCountDownTimer > FinalGameCountDownTime)
                 {
 
-                    // Reset the timers
                     FinalGameCountDownEnabled = false;
-                    FinalGameCountDownTimer = 0.0f;
 
                     // End the round
                     EndFightRound();
@@ -210,6 +208,9 @@ public class GameController : MonoBehaviour
 
         GameState = (int)GAME_STATE.STATE_FIGHT;
 
+        // Reset the no@ of dead crabs this round
+        DeadCrabs = 0;
+
         // Stop the player from controlling the crabs
         InputControllerRef.PlayerCanControlCrabs = false;
 
@@ -237,7 +238,11 @@ public class GameController : MonoBehaviour
         // If all but one (or more) crabs die the game state is updated (and all crabs are cleaned up etc)
         if (DeadCrabs >= (Crabs.Length - 1))
         {
+
             FinalGameCountDownEnabled = true;
+
+            // Reset the timers
+            FinalGameCountDownTimer = 0.0f;
         }
 
     }
