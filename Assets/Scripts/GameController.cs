@@ -195,7 +195,7 @@ public class GameController : MonoBehaviour
         for (int i1 = 0; i1 < Crabs.Length; i1++)
         {
 
-            Destroy(Crabs[i1]);
+            Destroy(Crabs[i1].gameObject);
 
         }
 
@@ -230,7 +230,7 @@ public class GameController : MonoBehaviour
 
     private void MenuUI()
     {
-
+        // 
     }
 
     private void CountDownUI()
@@ -246,7 +246,7 @@ public class GameController : MonoBehaviour
 
     private void FightUI()
     {
-
+        // 
     }
 
 }

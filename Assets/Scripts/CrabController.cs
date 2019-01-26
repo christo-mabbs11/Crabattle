@@ -23,7 +23,7 @@ public class CrabController : MonoBehaviour
     // Movement related variables //
     ////////////////////////////////
 
-    private float turnSpeed = 80.0f;
+    private float turnSpeed = 65.0f;
     private float moveSpeed = 1.0f;
 
     /////////////////////////////
@@ -104,9 +104,9 @@ public class CrabController : MonoBehaviour
 
     }
 
-    ///////////////////////////////
-    // Fighting related variables /
-    ///////////////////////////////
+    ////////////////////////////////
+    // Fighting related variables //
+    ////////////////////////////////
 
     public void EnableFightMode(CrabController FightCrab)
     {
@@ -164,7 +164,6 @@ public class CrabController : MonoBehaviour
             GameControllerRef.CrabHasDied();
 
             // SpriteRendererRef.enabled = false;
-            Debug.Log("Crab has died");
 
         }
 
