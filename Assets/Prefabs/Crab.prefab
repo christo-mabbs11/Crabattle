@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 50167344807574744}
   - component: {fileID: 6673808812902281489}
   - component: {fileID: 9124816763234297389}
+  - component: {fileID: 9029837174114770848}
   m_Layer: 0
   m_Name: Crab
   m_TagString: crab
@@ -115,6 +116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e83327c7f1d3341ae20ec52a6b408c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CrabState: 0
+  moveSpeed: 1
+  crabAttack: 5
+  crabDefence: 20
 --- !u!114 &9124816763234297389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,5 +132,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904334f2afc7935478d558f6e00319c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrabAIEnabled: 1
-  fightThreshold: 3
+  CrabID: -1
+--- !u!111 &9029837174114770848
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254873493704994}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: bfe14ba456dd6e74d9ee5d9277db585a, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
