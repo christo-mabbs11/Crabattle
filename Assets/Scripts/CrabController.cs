@@ -32,6 +32,9 @@ public class CrabController : MonoBehaviour
 
     private float crabAttack = 5.0f;
     private float crabDefence = 20.0f;
+    private CrabController CurrentFightCrab;
+    private float CrabFightTimer = 0.0f;
+    private float CrabFightTime = 1.0f;
 
     ///////////
     // Setup //
@@ -52,7 +55,7 @@ public class CrabController : MonoBehaviour
         // If the crab is fighting, run the the fight functionality
         if (CrabState == (int)CRAB_STATE.STATE_FIGHT)
         {
-
+            RunCrabFight();
         }
 
     }
@@ -101,10 +104,19 @@ public class CrabController : MonoBehaviour
     public void EnableFightMode(CrabController FightCrab)
     {
 
-        // Update the crab state
+        // If the crab is not dead
         if (crabDefence > 0)
         {
+
+            // Update the crab state
             CrabState = (int)CRAB_STATE.STATE_FIGHT;
+
+            // Reset the fight timer
+            CrabFightTimer = 0.0f;
+
+            // Inidcate which crab is being fought
+            CurrentFightCrab = FightCrab;
+
         }
 
     }
@@ -145,12 +157,23 @@ public class CrabController : MonoBehaviour
 
     }
 
-    // Function to give damage
-    private void sendDamage(CrabController argCrab)
+    private void RunCrabFight()
     {
 
-        // Apply this much damage to the other crab
-        argCrab.takeDamage(crabAttack);
+        // Update the fight timer
+        CrabFightTimer += Time.deltaTime;
+
+        // If the crab is ready to arrack again
+        if (CrabFightTimer >= CrabFightTime)
+        {
+
+            // Reset the fight timer
+            CrabFightTimer = 0.0f;
+
+            // Apply this much damage to the other crab
+            CurrentFightCrab.takeDamage(crabAttack);
+
+        }
 
     }
 
