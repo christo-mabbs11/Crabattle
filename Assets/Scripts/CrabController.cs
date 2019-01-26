@@ -10,6 +10,7 @@ public class CrabController : MonoBehaviour
     ////////////////
 
     Rigidbody2D Rigidbody2DRef;
+    GameController GameControllerRef;
 
     /////////////////////////////
     // State related variables //
@@ -41,6 +42,7 @@ public class CrabController : MonoBehaviour
 
         // Grab useful references
         Rigidbody2DRef = this.GetComponent<Rigidbody2D>();
+        GameControllerRef = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
     }
 
@@ -97,9 +99,10 @@ public class CrabController : MonoBehaviour
         {
 
             // Indicate the crab is dead
+            CrabState = (int)CRAB_STATE.STATE_DEAD;
 
             // Tell the game controller the crab has died
-
+            GameControllerRef.CrabHasDied();
 
         }
 
