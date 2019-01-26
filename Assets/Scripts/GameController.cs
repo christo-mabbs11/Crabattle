@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour
     private float CountDownTimer = 0.0f;
     private float CountDownTotalTime = 10.0f;
 
+    // Vairables related to the fight round
+    private int DeadCrabs = 0;
+
     ////////////////
     // References //
     ////////////////
@@ -147,6 +150,13 @@ public class GameController : MonoBehaviour
         InputControllerRef.PlayerCanControlCrabs = false;
 
         // Enable the AI controller on each crab to begin
+        for (int i1 = 0; i1 < Crabs.Length; i1++)
+        {
+
+            Crabs[i1].GetComponent<CrabAIController>().CrabAIEnabled = true;
+
+        }
+
 
     }
 
@@ -155,7 +165,36 @@ public class GameController : MonoBehaviour
     ///////////////////////////////////
 
     // Function for crabs to let the game controller know that they have died
-    // If all crabs die the game state is updated (and all crabs are cleaned up etc)
+    public void CrabHasDied()
+    {
+        // Indicate another crab has died
+        DeadCrabs++;
+
+        // If all crabs die the game state is updated (and all crabs are cleaned up etc)
+        if (DeadCrabs >= Crabs.Length)
+        {
+            EndFightRound();
+        }
+
+    }
+
+    private void EndFightRound()
+    {
+
+        // Room for embelishment, title screens, etc here..
+        //
+
+        // Delete all the crabs
+        for (int i1 = 0; i1 < Crabs.Length; i1++)
+        {
+
+            Destroy(Crabs[i1]);
+
+        }
+
+        // Go back to the menu scene
+        UpdateGameState();
+    }
 
     //////////////////////////
     // UI related functions //

@@ -89,11 +89,28 @@ public class CrabController : MonoBehaviour
     public void takeDamage(float argDMG)
     {
 
+        // Take this much damage 
+        crabDefence -= argDMG;
+
+        // If the health goes below 0
+        if (crabDefence <= 0)
+        {
+
+            // Indicate the crab is dead
+
+            // Tell the game controller the crab has died
+
+
+        }
+
     }
 
     // Function to give damage
     public void sendDamage(CrabController argCrab)
     {
+
+        // Apply this much damage to the other crab
+        argCrab.takeDamage(crabAttack);
 
     }
 
