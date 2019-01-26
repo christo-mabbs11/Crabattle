@@ -20,6 +20,12 @@ public class GameController : MonoBehaviour
     private int DeadCrabs = 0;
 
     GUIStyle GeneralGUIStyle;
+    GUIStyle GeneralGUIStyle_medium;
+    GUIStyle GeneralGUIStyle_smaller;
+    GUIStyle GeneralGUIStyle_outline;
+    GUIStyle GeneralGUIStyle_medium_outline;
+    GUIStyle GeneralGUIStyle_smaller_outline;
+    Color TextColor;
 
     ////////////////
     // References //
@@ -39,10 +45,22 @@ public class GameController : MonoBehaviour
         // Setup intial game state on game start
         UpdateGameState();
 
+        TextColor = new Color(0.25f, 0.25f, 0.25f, 1.0f);
+
         GeneralGUIStyle = new GUIStyle();
-        GeneralGUIStyle.fontSize = (int)(Screen.width * 0.045f);
-        GeneralGUIStyle.normal.textColor = Color.white;
-        GeneralGUIStyle.font = (Font)Resources.Load<Font>("Fonts/playtime");
+        GeneralGUIStyle.fontSize = (int)(Screen.width * 0.09f);
+        GeneralGUIStyle.normal.textColor = TextColor;
+        GeneralGUIStyle.font = (Font)Resources.Load<Font>("Fonts/Playtime");
+
+        GeneralGUIStyle_medium = new GUIStyle();
+        GeneralGUIStyle_medium.fontSize = (int)(Screen.width * 0.04f);
+        GeneralGUIStyle_medium.normal.textColor = TextColor;
+        GeneralGUIStyle_medium.font = (Font)Resources.Load<Font>("Fonts/Playtime");
+
+        GeneralGUIStyle_smaller = new GUIStyle();
+        GeneralGUIStyle_smaller.fontSize = (int)(Screen.width * 0.03f);
+        GeneralGUIStyle_smaller.normal.textColor = TextColor;
+        GeneralGUIStyle_smaller.font = (Font)Resources.Load<Font>("Fonts/Playtime");
     }
 
     void Update()
@@ -237,8 +255,9 @@ public class GameController : MonoBehaviour
 
     private void MenuUI()
     {
-        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "BASED ON A TRUE STORY", GeneralGUIStyle);
-        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "(PRESS SPACE TO START)", GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.18f, Screen.height * 0.1f, 0.0f, 0.0f), "BATTLE HERMITS", GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.3f, Screen.height * 0.25f, 0.0f, 0.0f), "BASED ON TRUE EVENTS", GeneralGUIStyle_medium);
+        GUI.Label(new Rect(Screen.width * 0.32f, Screen.height * 0.9f, 0.0f, 0.0f), "(PRESS SPACE TO START)", GeneralGUIStyle_smaller);
     }
 
     private void CountDownUI()
@@ -248,10 +267,9 @@ public class GameController : MonoBehaviour
         int timeInt = (int)Mathf.Round(CountDownTotalTime - CountDownTimer);    // Get the remaining time as an int
         string timeString = timeInt.ToString(); // Convert remaning time to string
 
-        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), timeString, GeneralGUIStyle);
-        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "COLLECT THE SHELLS", GeneralGUIStyle);
-        GUI.Label(new Rect(Screen.width * 0.5f, Screen.height * 0.5f, 0.0f, 0.0f), "BUILD YOUR HOME", GeneralGUIStyle);
-
+        GUI.Label(new Rect(Screen.width * 0.3f, Screen.height * 0.03f, 0.0f, 0.0f), "COLLECT THE SHELLS", GeneralGUIStyle_medium);
+        GUI.Label(new Rect(Screen.width * 0.37f, Screen.height * 0.1f, 0.0f, 0.0f), "BUILD YOUR HOME", GeneralGUIStyle_smaller);
+        GUI.Label(new Rect(Screen.width * 0.43f, Screen.height * 0.15f, 0.0f, 0.0f), timeString, GeneralGUIStyle);
 
     }
 
