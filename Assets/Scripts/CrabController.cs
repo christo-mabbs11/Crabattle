@@ -11,6 +11,13 @@ public class CrabController : MonoBehaviour
 
     Rigidbody2D Rigidbody2DRef;
 
+    /////////////////////////////
+    // State related variables //
+    /////////////////////////////
+
+    enum CRAB_STATE { STATE_PLAYERCONTROL = 0, STATE_AICONTROL = 2, STATE_DEAD = 1 };
+    private int CrabState = (int)CRAB_STATE.STATE_PLAYERCONTROL;
+
     ////////////////////////////////
     // Movement related variables //
     ////////////////////////////////

@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 
     // Time for the countdown round, saved as seconds
     private float CountDownTimer = 0.0f;
-    private float CountDownTotalTime = 120.0f;
+    private float CountDownTotalTime = 10.0f;
 
     ////////////////
     // References //
@@ -133,12 +133,18 @@ public class GameController : MonoBehaviour
         // Setup the timer for the round
         CountDownTimer = 0.0f;
 
+        // Allow the player to control the crabs
+        InputControllerRef.PlayerCanControlCrabs = true;
+
     }
 
     private void SetupFight()
     {
 
         GameState = (int)GAME_STATE.STATE_FIGHT;
+
+        // Stop the player from controlling the crabs
+        InputControllerRef.PlayerCanControlCrabs = false;
 
     }
 
