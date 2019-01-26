@@ -19,6 +19,15 @@ public class GameController : MonoBehaviour
     // Vairables related to the fight round
     private int DeadCrabs = 0;
 
+    // Final game counter vars
+    private bool FinalGameCountDownEnabled = false;
+    private float FinalGameCountDownTimer = 0.0f;
+    private float FinalGameCountDownTime = 4.0f;
+
+    // GUI biz
+    GUIStyle GeneralGUIStyle, GeneralGUIStyle_medium, GeneralGUIStyle_smaller, GeneralGUIStyle_xsmaller, GeneralGUIStyle_xxsmaller, GeneralGUIStyle_outline, GeneralGUIStyle_medium_outline, GeneralGUIStyle_smaller_outline;
+    Color TextColor;
+
     ////////////////
     // References //
     ////////////////
@@ -36,6 +45,33 @@ public class GameController : MonoBehaviour
 
         // Setup intial game state on game start
         UpdateGameState();
+
+        TextColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+        GeneralGUIStyle = new GUIStyle();
+        GeneralGUIStyle.fontSize = (int)(Screen.width * 0.09f);
+        GeneralGUIStyle.normal.textColor = TextColor;
+        GeneralGUIStyle.font = (Font)Resources.Load<Font>("Fonts/Playtime");
+
+        GeneralGUIStyle_medium = new GUIStyle();
+        GeneralGUIStyle_medium.fontSize = (int)(Screen.width * 0.04f);
+        GeneralGUIStyle_medium.normal.textColor = TextColor;
+        GeneralGUIStyle_medium.font = (Font)Resources.Load<Font>("Fonts/Playtime");
+
+        GeneralGUIStyle_smaller = new GUIStyle();
+        GeneralGUIStyle_smaller.fontSize = (int)(Screen.width * 0.03f);
+        GeneralGUIStyle_smaller.normal.textColor = TextColor;
+        GeneralGUIStyle_smaller.font = (Font)Resources.Load<Font>("Fonts/Playtime");
+
+        GeneralGUIStyle_xsmaller = new GUIStyle();
+        GeneralGUIStyle_xsmaller.fontSize = (int)(Screen.width * 0.02f);
+        GeneralGUIStyle_xsmaller.normal.textColor = TextColor;
+        GeneralGUIStyle_xsmaller.font = (Font)Resources.Load<Font>("Fonts/Playtime");
+
+        GeneralGUIStyle_xxsmaller = new GUIStyle();
+        GeneralGUIStyle_xxsmaller.fontSize = (int)(Screen.width * 0.015f);
+        GeneralGUIStyle_xxsmaller.normal.textColor = TextColor;
+        GeneralGUIStyle_xxsmaller.font = (Font)Resources.Load<Font>("Fonts/Playtime");
     }
 
     void Update()
@@ -69,6 +105,27 @@ public class GameController : MonoBehaviour
                 // Update the game state (start the fight!!)
                 UpdateGameState();
 
+            }
+
+        }
+        else if (GameState == (int)GAME_STATE.STATE_FIGHT)
+        {
+
+            if (FinalGameCountDownEnabled)
+            {
+                FinalGameCountDownTimer += Time.deltaTime;
+
+                if (FinalGameCountDownTimer > FinalGameCountDownTime)
+                {
+
+                    // Reset the timers
+                    FinalGameCountDownEnabled = false;
+                    FinalGameCountDownTimer = 0.0f;
+
+                    // End the round
+                    EndFightRound();
+
+                }
             }
 
         }
@@ -180,16 +237,13 @@ public class GameController : MonoBehaviour
         // If all but one (or more) crabs die the game state is updated (and all crabs are cleaned up etc)
         if (DeadCrabs >= (Crabs.Length - 1))
         {
-            EndFightRound();
+            FinalGameCountDownEnabled = true;
         }
 
     }
 
     private void EndFightRound()
     {
-
-        // Room for embelishment, title screens, etc here..
-        //
 
         // Delete all the crabs
         for (int i1 = 0; i1 < Crabs.Length; i1++)
@@ -230,7 +284,9 @@ public class GameController : MonoBehaviour
 
     private void MenuUI()
     {
-        // 
+        GUI.Label(new Rect(Screen.width * 0.18f, Screen.height * 0.03f, 0.0f, 0.0f), "BATTLE HERMITS", GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.3f, Screen.height * 0.25f, 0.0f, 0.0f), "BASED ON TRUE EVENTS", GeneralGUIStyle_medium);
+        GUI.Label(new Rect(Screen.width * 0.32f, Screen.height * 0.9f, 0.0f, 0.0f), "(PRESS SPACE TO START)", GeneralGUIStyle_smaller);
     }
 
     private void CountDownUI()
@@ -239,14 +295,23 @@ public class GameController : MonoBehaviour
         // Print the timer
         int timeInt = (int)Mathf.Round(CountDownTotalTime - CountDownTimer);    // Get the remaining time as an int
         string timeString = timeInt.ToString(); // Convert remaning time to string
-        GUI.Label(new Rect(10, 10, 100, 20), timeString);   // Print string as GUI object
 
+        GUI.Label(new Rect(Screen.width * 0.41f, Screen.height * 0.015f, 0.0f, 0.0f), "COLLECT THE SHELLS", GeneralGUIStyle_xsmaller);
+        GUI.Label(new Rect(Screen.width * 0.44f, Screen.height * 0.067f, 0.0f, 0.0f), "BUILD YOUR HOME", GeneralGUIStyle_xxsmaller);
+        if (timeInt > 9)
+        {
+            GUI.Label(new Rect(Screen.width * 0.477f, Screen.height * 0.1f, 0.0f, 0.0f), timeString, GeneralGUIStyle_medium);
+        }
+        else
+        {
+            GUI.Label(new Rect(Screen.width * 0.4855f, Screen.height * 0.1f, 0.0f, 0.0f), timeString, GeneralGUIStyle_medium);
+        }
 
     }
 
     private void FightUI()
     {
-        // 
+        GUI.Label(new Rect(Screen.width * 0.385f, Screen.height * 0.0f, 0.0f, 0.0f), "FIGHT", GeneralGUIStyle);
     }
 
 }
