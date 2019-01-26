@@ -67,6 +67,11 @@ public class ShellController : MonoBehaviour
             shell.transform.position = crabShellConnectionPoint.transform.position;
             shell.transform.parent = crabShellConnectionPoint.transform;
             shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+            CrabController tempCrabController = gameObject.GetComponent<CrabController>();
+            ShellStatsController tempShellStatsController = shell.GetComponentInChildren<ShellStatsController>();
+            tempCrabController.moveSpeed = tempCrabController.moveSpeed + tempShellStatsController.movementSpeed;
+            tempCrabController.crabAttack = tempCrabController.crabAttack + tempShellStatsController.attackDamage;
+            tempCrabController.crabDefence = tempCrabController.crabDefence + tempShellStatsController.defencePoints;
             //GameObject newShell = Instantiate(shell, new Vector3(0, 0, 0), shell.transform.rotation);
             //Destroy the old shell
             //Destroy(shell);
