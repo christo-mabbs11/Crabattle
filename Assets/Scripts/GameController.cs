@@ -275,7 +275,14 @@ public class GameController : MonoBehaviour
 
         GUI.Label(new Rect(Screen.width * 0.41f, Screen.height * 0.015f, 0.0f, 0.0f), "COLLECT THE SHELLS", GeneralGUIStyle_xsmaller);
         GUI.Label(new Rect(Screen.width * 0.44f, Screen.height * 0.067f, 0.0f, 0.0f), "BUILD YOUR HOME", GeneralGUIStyle_xxsmaller);
-        GUI.Label(new Rect(Screen.width * 0.477f, Screen.height * 0.1f, 0.0f, 0.0f), timeString, GeneralGUIStyle_medium);
+        if (timeInt > 9)
+        {
+            GUI.Label(new Rect(Screen.width * 0.477f, Screen.height * 0.1f, 0.0f, 0.0f), timeString, GeneralGUIStyle_medium);
+        }
+        else
+        {
+            GUI.Label(new Rect(Screen.width * 0.4855f, Screen.height * 0.1f, 0.0f, 0.0f), timeString, GeneralGUIStyle_medium);
+        }
 
     }
 
