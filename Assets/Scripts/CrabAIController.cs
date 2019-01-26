@@ -59,15 +59,7 @@ public class CrabAIController : MonoBehaviour
         if (CrabAIEnabled)
         {
 
-            //If we're dead then we're dead
-            //If we are close to another crab then we're fighting
-            //If we are set to move then look for the closest crab and move
-            if (aiState == AI_STATE.STATE_DEAD)
-            {
-                //Do nothing because we're dead
-            }
-
-            else if (aiState == AI_STATE.STATE_MOVE)
+            if (aiState == AI_STATE.STATE_MOVE)
             {
 
                 // Get the closest crab and move towards it
@@ -76,7 +68,7 @@ public class CrabAIController : MonoBehaviour
                 {
 
                     // If the crab is not dead
-                    if (crabObject.GetComponent<CrabAIController>().aiState != AI_STATE.STATE_DEAD)
+                    if (crabObject.GetComponent<CrabController>().GetCrabMode() != 2)
                     {
 
                         // Get the distance to this crab
@@ -89,16 +81,13 @@ public class CrabAIController : MonoBehaviour
                 }
 
                 // If we're close to a crab then change the state to fight
-                if (closestCrab.GetComponent<CrabAIController>().aiState != AI_STATE.STATE_DEAD)
+                if (Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) <= fightThreshold)
                 {
-                    if (Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) <= fightThreshold)
-                    {
-                        // Indicate we're in fight mode
-                        aiState = AI_STATE.STATE_FIGHT;
+                    // Indicate we're in fight mode
+                    aiState = AI_STATE.STATE_FIGHT;
 
-                        // Put crab into fight mode
-                        crabController.EnableFightMode(closestCrab.GetComponent<CrabController>());
-                    }
+                    // Put crab into fight mode
+                    crabController.EnableFightMode(closestCrab.GetComponent<CrabController>());
                 }
             }
 
@@ -107,7 +96,7 @@ public class CrabAIController : MonoBehaviour
             {
 
                 // If we're no longer close to a crab or the closest crab is dead then change the state to move
-                if (closestCrab.GetComponent<CrabAIController>().aiState == AI_STATE.STATE_DEAD || Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) > fightThreshold)
+                if (closestCrab.GetComponent<CrabController>().GetCrabMode() == 2 || Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) > fightThreshold)
                 {
                     // Indicate we're in move mode
                     aiState = AI_STATE.STATE_MOVE;
@@ -149,8 +138,6 @@ public class CrabAIController : MonoBehaviour
 
                     // Calculate the angles of the crab going left and right
                     float CrabTurnInfo = convertAngle360(currentCrabAngle - closestCrabAngle);
-
-                    // Stop the crab shakes (only if the angle is signifcant enough)
 
                     // Turn the crab based on what size is closer
                     if (CrabTurnInfo > 90.0f && CrabTurnInfo <= 270.0f)
