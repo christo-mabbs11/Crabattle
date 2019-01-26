@@ -19,12 +19,8 @@ public class GameController : MonoBehaviour
     // Vairables related to the fight round
     private int DeadCrabs = 0;
 
-    GUIStyle GeneralGUIStyle;
-    GUIStyle GeneralGUIStyle_medium;
-    GUIStyle GeneralGUIStyle_smaller;
-    GUIStyle GeneralGUIStyle_outline;
-    GUIStyle GeneralGUIStyle_medium_outline;
-    GUIStyle GeneralGUIStyle_smaller_outline;
+    // GUI biz
+    GUIStyle GeneralGUIStyle, GeneralGUIStyle_medium, GeneralGUIStyle_smaller, GeneralGUIStyle_xsmaller, GeneralGUIStyle_xxsmaller, GeneralGUIStyle_outline, GeneralGUIStyle_medium_outline, GeneralGUIStyle_smaller_outline;
     Color TextColor;
 
     ////////////////
@@ -61,6 +57,16 @@ public class GameController : MonoBehaviour
         GeneralGUIStyle_smaller.fontSize = (int)(Screen.width * 0.03f);
         GeneralGUIStyle_smaller.normal.textColor = TextColor;
         GeneralGUIStyle_smaller.font = (Font)Resources.Load<Font>("Fonts/Playtime");
+
+        GeneralGUIStyle_xsmaller = new GUIStyle();
+        GeneralGUIStyle_xsmaller.fontSize = (int)(Screen.width * 0.02f);
+        GeneralGUIStyle_xsmaller.normal.textColor = TextColor;
+        GeneralGUIStyle_xsmaller.font = (Font)Resources.Load<Font>("Fonts/Playtime");
+
+        GeneralGUIStyle_xxsmaller = new GUIStyle();
+        GeneralGUIStyle_xxsmaller.fontSize = (int)(Screen.width * 0.015f);
+        GeneralGUIStyle_xxsmaller.normal.textColor = TextColor;
+        GeneralGUIStyle_xxsmaller.font = (Font)Resources.Load<Font>("Fonts/Playtime");
     }
 
     void Update()
@@ -267,9 +273,9 @@ public class GameController : MonoBehaviour
         int timeInt = (int)Mathf.Round(CountDownTotalTime - CountDownTimer);    // Get the remaining time as an int
         string timeString = timeInt.ToString(); // Convert remaning time to string
 
-        GUI.Label(new Rect(Screen.width * 0.3f, Screen.height * 0.03f, 0.0f, 0.0f), "COLLECT THE SHELLS", GeneralGUIStyle_medium);
-        GUI.Label(new Rect(Screen.width * 0.37f, Screen.height * 0.1f, 0.0f, 0.0f), "BUILD YOUR HOME", GeneralGUIStyle_smaller);
-        GUI.Label(new Rect(Screen.width * 0.43f, Screen.height * 0.15f, 0.0f, 0.0f), timeString, GeneralGUIStyle);
+        GUI.Label(new Rect(Screen.width * 0.41f, Screen.height * 0.015f, 0.0f, 0.0f), "COLLECT THE SHELLS", GeneralGUIStyle_xsmaller);
+        GUI.Label(new Rect(Screen.width * 0.44f, Screen.height * 0.067f, 0.0f, 0.0f), "BUILD YOUR HOME", GeneralGUIStyle_xxsmaller);
+        GUI.Label(new Rect(Screen.width * 0.477f, Screen.height * 0.1f, 0.0f, 0.0f), timeString, GeneralGUIStyle_medium);
 
     }
 
