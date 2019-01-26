@@ -11,27 +11,35 @@ public class CrabAIController : MonoBehaviour
     enum AI_STATE { STATE_MOVE = 0, STATE_FIGHT = 1, STATE_DEAD = 2 };
     private AI_STATE aiState = AI_STATE.STATE_MOVE;
     private GameObject[] crabsToFight;
-    public float fightThreshold = 3.0f;
+    private float fightThreshold = 1.0f;
+
+    public int CrabID = -1;
 
     // Awake function gets a refernce to crab controller for controling the crab
     void Awake()
     {
         crabController = gameObject.GetComponent<CrabController>();
+    }
+
+    public void PostAllCrabsCreateInit()
+    {
         GameObject[] tempCrabsArray = GameObject.FindGameObjectsWithTag("crab");
-        this.crabsToFight = new GameObject[tempCrabsArray.Length - 1];
+        crabsToFight = new GameObject[tempCrabsArray.Length - 1];
+
         bool foundPlayerCrab = false;
         for (int i = 0; i < tempCrabsArray.Length; i++)
         {
             GameObject tempGameObject = tempCrabsArray[i];
+
             if (tempGameObject != this.gameObject)
             {
                 if (foundPlayerCrab)
                 {
-                    this.crabsToFight[i - 1] = tempGameObject;
+                    crabsToFight[i - 1] = tempGameObject;
                 }
                 else
                 {
-                    this.crabsToFight[i] = tempGameObject;
+                    crabsToFight[i] = tempGameObject;
                 }
             }
             else
@@ -107,53 +115,83 @@ public class CrabAIController : MonoBehaviour
         if (CrabAIEnabled)
         {
 
-            Debug.Log(aiState);
-
             //Debug.Log("Crab ai enabled YES");
             if (aiState == AI_STATE.STATE_MOVE)
             {
-                //Get the closest crab and move towards it
-                float closestCrabDistance = 10000000000;
+
+                // Get the closest crab and move towards it
+                float closestCrabDistance = float.MaxValue;
                 GameObject closestCrab = null;
+
+                // Loop through the crabs
                 foreach (GameObject crabObject in crabsToFight)
                 {
+
+                    // If the crab is not dead
                     if (crabObject.GetComponent<CrabAIController>().aiState != AI_STATE.STATE_DEAD)
                     {
+
+                        // Get the distance to this crab
                         if (Vector3.Distance(crabObject.transform.position, gameObject.transform.position) < closestCrabDistance)
                         {
-                            //Debug.Log("New close crab!");
                             closestCrabDistance = Vector3.Distance(crabObject.transform.position, gameObject.transform.position);
                             closestCrab = crabObject;
                         }
-                        break;
                     }
                 }
+
+                // If there is not a closest crab
                 if (closestCrab != null)
                 {
 
-                    // Debug.Log(transform.rotation.eulerAngles.z);
-                    Vector3 myVector = closestCrab.transform.position - transform.position;
-                    myVector = Vector3.Normalize(myVector);
-                    float newAngle = Mathf.Atan2(myVector.y, myVector.x);
-                    newAngle = newAngle + 220;
+                    // Find the current angle of the crab
+                    float currentCrabAngle = transform.rotation.eulerAngles.z;
 
-                    // Debug.Log("New angle = "+newAngle);
-                    // Debug.Log("Final angle = "+(transform.rotation.eulerAngles.z-newAngle));
-                    float finalAngle = transform.rotation.eulerAngles.z - newAngle;
-                    if (finalAngle < 0)
+                    // find the angle to the clostest crab
+                    Vector3 myVector = closestCrab.transform.position - transform.position;
+                    float closestCrabAngle = Mathf.Atan2(myVector.y, myVector.x) * 180 / Mathf.PI;
+
+                    // Adjust the angles to be within the realms of 360 degrees
+                    currentCrabAngle = convertAngle360(currentCrabAngle);
+                    closestCrabAngle = convertAngle360(closestCrabAngle);
+
+                    // Calculate the angles of the crab going left and right
+                    float CrabLeftAngle = convertAngle360(currentCrabAngle - closestCrabAngle);
+                    float CrabRightAngle = convertAngle360(closestCrabAngle - currentCrabAngle);
+
+                    // Debug info for just one crab
+                    // if (CrabID == 0)
+                    // {
+                    //     Debug.Log(CrabID + ", currentCrabAngle: " + currentCrabAngle);
+                    //     Debug.Log(CrabID + ", closestCrabAngle: " + closestCrabAngle);
+                    //     Debug.Log(CrabID + ", CrabLeftAngle: " + CrabLeftAngle);
+                    //     Debug.Log(CrabID + ", CrabRightAngle: " + CrabRightAngle);
+                    // }
+
+                    // If there is a great enough difference between the angles
+                    // if (convertAngle360(CrabRightAngle - CrabLeftAngle) > 5.0f)
+                    // {
+                    // Determine if it is faster to go left or right
+                    if (CrabLeftAngle > CrabRightAngle)
                     {
-                        // Debug.Log("Turning Left");
-                        crabController.turnCrab(false);
+                        if (CrabRightAngle > 90.0f)
+                        {
+                            crabController.turnCrab(false);
+                        }
+                        else
+                        {
+                            crabController.turnCrab(true);
+                        }
+                        Debug.Log("hit a");
+                        // crabController.moveCrab(false);
                     }
-                    else if (finalAngle > 0)
+                    else if (CrabLeftAngle < CrabRightAngle)
                     {
-                        // Debug.Log("Turning Right");
-                        crabController.turnCrab(true);
+                        // crabController.turnCrab(true);
+                        // Debug.Log("hit b");
+                        // crabController.moveCrab(false);
                     }
-                    else
-                    {
-                        crabController.moveCrab(true);
-                    }
+                    // }
                 }
             }
             else if (aiState == AI_STATE.STATE_FIGHT)
@@ -161,6 +199,24 @@ public class CrabAIController : MonoBehaviour
 
             }
         }
+
+    }
+
+    private float convertAngle360(float argAngle)
+    {
+
+        if (argAngle > 360.0f)
+        {
+            argAngle -= 360.0f;
+
+        }
+        else if (argAngle < 0.0f)
+        {
+            argAngle += 360.0f;
+
+        }
+
+        return argAngle;
 
     }
 

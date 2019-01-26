@@ -127,7 +127,14 @@ public class GameController : MonoBehaviour
             // Add that crab to the game world and starts the game
             GameObject tempCrab = (GameObject)Instantiate(CrabPrefab, CrabSpawns[i1].transform.position, CrabSpawns[i1].transform.rotation);
             Crabs[i1] = tempCrab.GetComponent<CrabController>();
+            Crabs[i1].GetComponent<CrabAIController>().CrabID = i1;
 
+        }
+
+        // Init all crabs
+        for (int i1 = 0; i1 < CrabSpawns.Length; i1++)
+        {
+            Crabs[i1].GetComponent<CrabAIController>().PostAllCrabsCreateInit();
         }
 
         // Set this up with the inital game controller
