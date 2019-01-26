@@ -24,6 +24,15 @@ public class GameController : MonoBehaviour
     private float FinalGameCountDownTimer = 0.0f;
     private float FinalGameCountDownTime = 4.0f;
 
+    //Music
+    public AudioClip clipPeaceful;
+    public AudioClip clipBattle;
+
+    [HideInInspector]
+    public AudioSource audioPeaceful;
+    [HideInInspector]
+    public AudioSource audioBattle;
+
     // GUI biz
     GUIStyle GeneralGUIStyle, GeneralGUIStyle_medium, GeneralGUIStyle_smaller, GeneralGUIStyle_xsmaller, GeneralGUIStyle_xxsmaller, GeneralGUIStyle_outline, GeneralGUIStyle_medium_outline, GeneralGUIStyle_smaller_outline;
     Color TextColor;
@@ -39,6 +48,9 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        //Audio
+        audioPeaceful = addAudio(clipPeaceful, true, true, 1.0f);
+        audioBattle = addAudio(clipBattle, true, false, 1.0f);
 
         // Grab refs
         InputControllerRef = GameObject.FindGameObjectWithTag("InputController").GetComponent<InputController>();
@@ -80,6 +92,11 @@ public class GameController : MonoBehaviour
         // If we're in meu mode
         if (GameState == (int)GAME_STATE.STATE_MENU)
         {
+            if (!audioPeaceful.isPlaying)
+            {
+                audioPeaceful.Play();
+                audioBattle.Stop();
+            }
 
             // If the user hits spacebar start the game
             if (Input.GetKey(KeyCode.Space))
@@ -94,7 +111,11 @@ public class GameController : MonoBehaviour
         // If we're in the coundown mode
         else if (GameState == (int)GAME_STATE.STATE_COUNTDOWN)
         {
-
+            if (!audioPeaceful.isPlaying)
+            {
+                audioPeaceful.Play();
+                audioBattle.Stop();
+            }
             // Count up the timer
             CountDownTimer += Time.deltaTime;
 
@@ -110,7 +131,11 @@ public class GameController : MonoBehaviour
         }
         else if (GameState == (int)GAME_STATE.STATE_FIGHT)
         {
-
+            if (!audioBattle.isPlaying)
+            {
+                audioPeaceful.Stop();
+                audioBattle.Play();
+            }
             if (FinalGameCountDownEnabled)
             {
                 FinalGameCountDownTimer += Time.deltaTime;
@@ -183,7 +208,6 @@ public class GameController : MonoBehaviour
             GameObject tempCrab = (GameObject)Instantiate(CrabPrefab, CrabSpawns[i1].transform.position, CrabSpawns[i1].transform.rotation);
             Crabs[i1] = tempCrab.GetComponent<CrabController>();
             Crabs[i1].GetComponent<CrabAIController>().CrabID = i1;
-
         }
 
         // Init all crabs
@@ -242,7 +266,7 @@ public class GameController : MonoBehaviour
             FinalGameCountDownEnabled = true;
 
             // Reset the timers
-            FinalGameCountDownTimer = 0.0f;
+            FinalGameCountDownTimer = 0.0f;            
         }
 
     }
@@ -281,7 +305,14 @@ public class GameController : MonoBehaviour
                 break;
 
             case (int)GAME_STATE.STATE_FIGHT:
-                FightUI();
+                if (FinalGameCountDownEnabled)
+                {
+                    WinnerUI();
+                }
+                else
+                {
+                    FightUI();
+                }
                 break;
         }
 
@@ -317,6 +348,22 @@ public class GameController : MonoBehaviour
     private void FightUI()
     {
         GUI.Label(new Rect(Screen.width * 0.385f, Screen.height * 0.0f, 0.0f, 0.0f), "FIGHT", GeneralGUIStyle);
+    }
+
+    private void WinnerUI()
+    {
+        GUI.Label(new Rect(Screen.width * 0.28f, Screen.height * 0.1f, 0.0f, 0.0f), "YOU HAVE THE MOST FABULOUS HOME!", GeneralGUIStyle_smaller);
+    }
+
+    //clip:AudioClip, loop: boolean, playAwake: boolean, vol: float): AudioSource
+    AudioSource addAudio(AudioClip clip, bool loop, bool playAwake, float volume)
+    {
+        AudioSource newAudio = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
+        newAudio.clip = clip;
+        newAudio.loop = loop;
+        newAudio.playOnAwake = playAwake;
+        newAudio.volume = volume;
+        return newAudio;
     }
 
 }

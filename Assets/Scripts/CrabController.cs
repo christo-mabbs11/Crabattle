@@ -18,7 +18,7 @@ public class CrabController : MonoBehaviour
     /////////////////////////////
 
     enum CRAB_STATE { STATE_MOVE = 0, STATE_FIGHT = 1, STATE_DEAD = 2 };
-    private int CrabState = (int)CRAB_STATE.STATE_MOVE;
+    public int CrabState = (int)CRAB_STATE.STATE_MOVE;
 
     ////////////////////////////////
     // Movement related variables //
@@ -172,7 +172,7 @@ public class CrabController : MonoBehaviour
 
             // Just here david
             // Debug
-            SpriteRendererRef.enabled = false;
+            //SpriteRendererRef.enabled = false;
 
         }
 

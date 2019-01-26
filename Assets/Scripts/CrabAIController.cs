@@ -12,6 +12,8 @@ public class CrabAIController : MonoBehaviour
     private AI_STATE aiState = AI_STATE.STATE_MOVE;
     private GameObject[] crabsToFight;
     private float fightThreshold = 1.2f;
+    private battleAnimationScript battleCloudSprite;
+    private DeathAnimationScript deathCloudSprite;
 
     GameObject closestCrab = null;
 
@@ -21,6 +23,9 @@ public class CrabAIController : MonoBehaviour
     void Awake()
     {
         crabController = gameObject.GetComponent<CrabController>();
+        battleCloudSprite = gameObject.GetComponentInChildren<battleAnimationScript>();
+        deathCloudSprite = gameObject.GetComponentInChildren<DeathAnimationScript>();
+        
     }
 
     public void PostAllCrabsCreateInit()
@@ -84,10 +89,12 @@ public class CrabAIController : MonoBehaviour
                 if (Vector3.Distance(closestCrab.transform.position, gameObject.transform.position) <= fightThreshold)
                 {
                     // Indicate we're in fight mode
-                    aiState = AI_STATE.STATE_FIGHT;
-
-                    // Put crab into fight mode
-                    crabController.EnableFightMode(closestCrab.GetComponent<CrabController>());
+                    if (closestCrab.GetComponentInChildren<CrabAIController>().aiState != AI_STATE.STATE_DEAD)
+                    {
+                        aiState = AI_STATE.STATE_FIGHT;
+                        // Put crab into fight mode
+                        crabController.EnableFightMode(closestCrab.GetComponent<CrabController>());
+                    }
                 }
             }
 
@@ -125,6 +132,24 @@ public class CrabAIController : MonoBehaviour
 
     void Update()
     {
+
+        if (aiState == AI_STATE.STATE_FIGHT)
+        {
+            battleCloudSprite.enableSprite();
+        }
+        else
+        {
+            battleCloudSprite.disableSprite();
+        }
+
+        if (aiState == AI_STATE.STATE_DEAD)
+        {
+            deathCloudSprite.enableSprite();
+        }
+        else
+        {
+            deathCloudSprite.disableSprite();
+        }
 
         // Complete actions if AI is running
         if (CrabAIEnabled)

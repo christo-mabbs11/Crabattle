@@ -993,5 +993,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1648719114679719506, guid: ae1f34a8ee1b8f940be7b3494423c9f1,
         type: 3}
+    - target: {fileID: 2104823733837604006, guid: 1aa03530f2eddb94e9086742fc6a6dcf,
+        type: 3}
+      propertyPath: clipPeaceful
+      value: 
+      objectReference: {fileID: 8300000, guid: 9dce1c36df5534643a8afeb369a09b86, type: 3}
+    - target: {fileID: 2104823733837604006, guid: 1aa03530f2eddb94e9086742fc6a6dcf,
+        type: 3}
+      propertyPath: clipBattle
+      value: 
+      objectReference: {fileID: 8300000, guid: 8716ba284ff6ae048b621cea926c3569, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aa03530f2eddb94e9086742fc6a6dcf, type: 3}
