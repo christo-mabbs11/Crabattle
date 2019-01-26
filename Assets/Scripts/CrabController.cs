@@ -36,6 +36,12 @@ public class CrabController : MonoBehaviour
     private float CrabFightTimer = 0.0f;
     private float CrabFightTime = 1.0f;
 
+    /////////////////////////////////////
+    // Sprite reference used for Debug //
+    /////////////////////////////////////
+
+    SpriteRenderer SpriteRendererRef;
+
     ///////////
     // Setup //
     ///////////
@@ -46,6 +52,7 @@ public class CrabController : MonoBehaviour
         // Grab useful references
         Rigidbody2DRef = this.GetComponent<Rigidbody2D>();
         GameControllerRef = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        SpriteRendererRef = this.gameObject.GetComponentInChildren<SpriteRenderer>();
 
     }
 
@@ -150,8 +157,14 @@ public class CrabController : MonoBehaviour
             // Indicate the crab is dead
             CrabState = (int)CRAB_STATE.STATE_DEAD;
 
+            // Tell the AI this crab has died
+            this.GetComponent<CrabAIController>().KillCrabAI();
+
             // Tell the game controller the crab has died
             GameControllerRef.CrabHasDied();
+
+            // SpriteRendererRef.enabled = false;
+            Debug.Log("Crab has died");
 
         }
 
