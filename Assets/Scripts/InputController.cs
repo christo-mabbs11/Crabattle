@@ -20,8 +20,6 @@ public class InputController : MonoBehaviour
 
         CrabControllerRef = Crabs;
 
-        Debug.Log(CrabControllerRef[0]);
-
     }
 
     void Update()

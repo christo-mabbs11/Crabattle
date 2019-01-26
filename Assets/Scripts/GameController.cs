@@ -12,6 +12,10 @@ public class GameController : MonoBehaviour
     enum GAME_STATE { STATE_STARTUP = -1, STATE_MENU = 0, STATE_COUNTDOWN = 1, STATE_FIGHT = 2 };
     private int GameState = (int)GAME_STATE.STATE_STARTUP;
 
+    // Time for the countdown round, saved as seconds
+    private float CountDownTimer = 0.0f;
+    private float CountDownTotalTime = 120.0f;
+
     ////////////////
     // References //
     ////////////////
@@ -34,15 +38,32 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
-        // If the user hits spacebar start the game
-        if (Input.GetKey(KeyCode.Space))
+        // If we're in meu mode
+        if (GameState == (int)GAME_STATE.STATE_MENU)
         {
 
-            // If we're in meu mode
-            if (GameState == (int)GAME_STATE.STATE_MENU)
+            // If the user hits spacebar start the game
+            if (Input.GetKey(KeyCode.Space))
             {
 
                 // Start that game!
+                UpdateGameState();
+
+            }
+
+        }
+        // If we're in the coundown mode
+        else if (GameState == (int)GAME_STATE.STATE_COUNTDOWN)
+        {
+
+            // Count up the timer
+            CountDownTimer += Time.deltaTime;
+
+            // If the timer is completed
+            if (CountDownTimer >= CountDownTotalTime)
+            {
+
+                // Update the game state (start the fight!!)
                 UpdateGameState();
 
             }
@@ -109,12 +130,61 @@ public class GameController : MonoBehaviour
         // Set this up with the inital game controller
         InputControllerRef.SetupCrabs(Crabs);
 
+        // Setup the timer for the round
+        CountDownTimer = 0.0f;
+
     }
 
     private void SetupFight()
     {
 
         GameState = (int)GAME_STATE.STATE_FIGHT;
+
+    }
+
+    //////////////////////////
+    // UI related functions //
+    //////////////////////////
+
+    void OnGUI()
+    {
+
+        // Update the next game state based on this game's state
+        switch (GameState)
+        {
+            case (int)GAME_STATE.STATE_MENU:
+                MenuUI();
+                break;
+
+            case (int)GAME_STATE.STATE_COUNTDOWN:
+                CountDownUI();
+                break;
+
+            case (int)GAME_STATE.STATE_FIGHT:
+                FightUI();
+                break;
+        }
+
+    }
+
+    private void MenuUI()
+    {
+
+    }
+
+    private void CountDownUI()
+    {
+
+        // Print the timer
+        int timeInt = (int)Mathf.Round(CountDownTotalTime - CountDownTimer);    // Get the remaining time as an int
+        string timeString = timeInt.ToString(); // Convert remaning time to string
+        GUI.Label(new Rect(10, 10, 100, 20), timeString);   // Print string as GUI object
+
+
+    }
+
+    private void FightUI()
+    {
 
     }
 
