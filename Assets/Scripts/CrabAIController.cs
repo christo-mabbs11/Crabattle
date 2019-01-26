@@ -163,10 +163,10 @@ public class CrabAIController : MonoBehaviour
                             crabController.moveCrab(true);
 
                             // Turn the crab if they need to
-                            if ((CrabTurnInfo > 175.0f && CrabTurnInfo < 185.0f))
+                            if ((CrabTurnInfo >= 175.0f && CrabTurnInfo <= 185.0f))
                             {
 
-                                if (CrabTurnInfo > 180.0f)
+                                if (CrabTurnInfo >= 180.0f)
                                 {
                                     crabController.turnCrab(true);
 
@@ -187,10 +187,10 @@ public class CrabAIController : MonoBehaviour
                             crabController.moveCrab(false);
 
                             // Turn the crab if they need to
-                            if (CrabTurnInfo < 5.0f || CrabTurnInfo < 355.0f)
+                            if (CrabTurnInfo <= 5.0f || CrabTurnInfo <= 355.0f)
                             {
 
-                                if (CrabTurnInfo > 180.0f)
+                                if (CrabTurnInfo >= 180.0f)
                                 {
                                     crabController.turnCrab(false);
 
