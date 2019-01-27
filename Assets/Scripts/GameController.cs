@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     public AudioClip clipPeaceful;
     public AudioClip clipBattle;
     public AudioClip clipFight;
+    public AudioClip clipSeaguls;
 
     //Players
     public Material basic;
@@ -41,6 +42,8 @@ public class GameController : MonoBehaviour
     public AudioSource audioBattle;
     [HideInInspector]
     public AudioSource audioFight;
+    [HideInInspector]
+    public AudioSource audioSeaguls;
 
     // GUI biz
     GUIStyle GeneralGUIStyle, GeneralGUIStyle_medium, GeneralGUIStyle_smaller, GeneralGUIStyle_xsmaller, GeneralGUIStyle_xxsmaller, GeneralGUIStyle_outline, GeneralGUIStyle_medium_outline, GeneralGUIStyle_smaller_outline;
@@ -62,6 +65,7 @@ public class GameController : MonoBehaviour
         audioPeaceful = addAudio(clipPeaceful, true, true, 0.5f);
         audioBattle = addAudio(clipBattle, true, false, 0.3f);
         audioFight = addAudio(clipFight, true, false, 1.0f);
+        audioSeaguls = addAudio(clipSeaguls, true, false, 0.3f);
 
         // Grab refs
         InputControllerRef = GameObject.FindGameObjectWithTag("InputController").GetComponent<InputController>();
@@ -99,7 +103,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-
+        
         // If we're in meu mode
         if (GameState == (int)GAME_STATE.STATE_MENU)
         {
@@ -107,6 +111,11 @@ public class GameController : MonoBehaviour
             {
                 audioPeaceful.Play();
                 audioBattle.Stop();
+            }
+            if (!audioSeaguls.isPlaying)
+            {
+                audioSeaguls.Play();
+                audioSeaguls.Stop();
             }
 
             // If the user hits spacebar start the game

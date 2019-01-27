@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254873493704994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.898419, y: -1.1937244, z: 0}
+  m_LocalPosition: {x: 0.07, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904334f2afc7935478d558f6e00319c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiState: 0
   CrabID: -1
 --- !u!111 &9029837174114770848
 Animation:
@@ -145,6 +146,6 @@ Animation:
   m_Animation: {fileID: 7400000, guid: bfe14ba456dd6e74d9ee5d9277db585a, type: 2}
   m_Animations: []
   m_WrapMode: 0
-  m_PlayAutomatically: 0
+  m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0

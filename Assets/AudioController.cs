@@ -58,7 +58,7 @@ public class AudioController : MonoBehaviour
 
     private void Awake()
     {
-        audioScuttle = addAudio(clipScuttle, true, false, 1.0f);
+        audioScuttle = addAudio(clipScuttle, true, false, 0.5f);
         audioSpace = addAudio(clipSpace, false, false, 1.0f);
         audioSos = addAudio(clipSos, false, false, 1.0f);
         audioRain = addAudio(clipRain, false, false, 1.0f);
