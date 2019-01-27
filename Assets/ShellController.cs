@@ -13,12 +13,17 @@ public class ShellController : MonoBehaviour
     public GameObject shellObject4;
     public GameObject crabShellConnectionPoint;
 
+    public AudioClip pickupSound;
+    [HideInInspector]
+    public AudioSource audioPickup;
+
     private float shellGetCooldown = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         shellsArray = new ArrayList();
+        audioPickup = addAudio(MakeSubclip(pickupSound,2.2f,4.0f), false, false, 1.0f);
     }
 
     // Update is called once per frame
@@ -111,10 +116,39 @@ public class ShellController : MonoBehaviour
             if (this.shellsArray.Count < shellsAllowed)
             {
                 // Debug.Log("Touched a shell! ---------------------------------------------------------------");
+                //Play a sound!
+                audioPickup.Play();
                 col.gameObject.tag = "Untagged";
                 col.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 gameObject.GetComponent<ShellController>().shellPickedUp(col.gameObject);
             }
         }
+    }
+
+    AudioSource addAudio(AudioClip clip, bool loop, bool playAwake, float volume)
+    {
+        AudioSource newAudio = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
+        newAudio.clip = clip;
+        newAudio.loop = loop;
+        newAudio.playOnAwake = playAwake;
+        newAudio.volume = volume;
+        return newAudio;
+    }
+
+    private AudioClip MakeSubclip(AudioClip clip, float start, float stop)
+    {
+        /* Create a new audio clip */
+        int frequency = clip.frequency;
+        float timeLength = stop - start;
+        int samplesLength = (int)(frequency * timeLength);
+        AudioClip newClip = AudioClip.Create(clip.name + "-sub", samplesLength, 1, frequency, false);
+        /* Create a temporary buffer for the samples */
+        float[] data = new float[samplesLength];
+        /* Get the data from the original clip */
+        clip.GetData(data, (int)(frequency * start));
+        /* Transfer the data to the new clip */
+        newClip.SetData(data, 0);
+        /* Return the sub clip */
+        return newClip;
     }
 }

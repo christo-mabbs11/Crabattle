@@ -3,7 +3,14 @@ guid: a8293a5c3f3c7c841ae7500834db57d6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - shellObject1: {instanceID: 0}
+  - shellObject2: {instanceID: 0}
+  - shellObject3: {instanceID: 0}
+  - shellObject4: {instanceID: 0}
+  - crabShellConnectionPoint: {instanceID: 0}
+  - pickupSound: {fileID: 8300000, guid: 8716ba284ff6ae048b621cea926c3569, type: 3}
+  - audioPickup: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

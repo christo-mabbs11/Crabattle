@@ -12,6 +12,7 @@ public class CrabController : MonoBehaviour
     Rigidbody2D Rigidbody2DRef;
     GameController GameControllerRef;
     AudioController audioController;
+    
 
     /////////////////////////////
     // State related variables //
@@ -94,7 +95,7 @@ public class CrabController : MonoBehaviour
         //Debug.Log("Play Audio");
         if (!audioController.audioScuttle.isPlaying)
         {
-            Debug.Log("Start Audio");
+            //Debug.Log("Start Audio");
             audioController.audioScuttle.Play();
         }
         Vector2 dir = (Vector2)(Quaternion.Euler(0, 0, Rigidbody2DRef.rotation) * Vector2.right);

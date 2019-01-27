@@ -1023,5 +1023,10 @@ PrefabInstance:
       propertyPath: yellow
       value: 
       objectReference: {fileID: 2100000, guid: 884ed6575200d814b8ac9709091c18de, type: 2}
+    - target: {fileID: 2104823733837604006, guid: 1aa03530f2eddb94e9086742fc6a6dcf,
+        type: 3}
+      propertyPath: clipFight
+      value: 
+      objectReference: {fileID: 8300000, guid: 367579e426438a540a5c223306af2e7e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aa03530f2eddb94e9086742fc6a6dcf, type: 3}

@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     //Music
     public AudioClip clipPeaceful;
     public AudioClip clipBattle;
+    public AudioClip clipFight;
 
     //Players
     public Material basic;
@@ -38,6 +39,8 @@ public class GameController : MonoBehaviour
     public AudioSource audioPeaceful;
     [HideInInspector]
     public AudioSource audioBattle;
+    [HideInInspector]
+    public AudioSource audioFight;
 
     // GUI biz
     GUIStyle GeneralGUIStyle, GeneralGUIStyle_medium, GeneralGUIStyle_smaller, GeneralGUIStyle_xsmaller, GeneralGUIStyle_xxsmaller, GeneralGUIStyle_outline, GeneralGUIStyle_medium_outline, GeneralGUIStyle_smaller_outline;
@@ -56,8 +59,9 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         //Audio
-        audioPeaceful = addAudio(clipPeaceful, true, true, 1.0f);
-        audioBattle = addAudio(clipBattle, true, false, 1.0f);
+        audioPeaceful = addAudio(clipPeaceful, true, true, 0.5f);
+        audioBattle = addAudio(clipBattle, true, false, 0.3f);
+        audioFight = addAudio(clipFight, true, false, 1.0f);
 
         // Grab refs
         InputControllerRef = GameObject.FindGameObjectWithTag("InputController").GetComponent<InputController>();
@@ -157,6 +161,28 @@ public class GameController : MonoBehaviour
 
                 }
             }
+
+            bool fightHappening = false;
+            for (int i1 = 0; i1 < Crabs.Length; i1++)
+            {                
+                if (Crabs[i1].GetComponent<CrabAIController>().aiState == CrabAIController.AI_STATE.STATE_FIGHT)
+                {
+                    //Play fight audio
+                    fightHappening = true;
+                }
+                if (fightHappening)
+                {
+                    if (!audioFight.isPlaying)
+                    {
+                        audioFight.Play();
+                    }
+                }
+                else
+                {
+                    audioFight.Pause();
+                }
+                
+            }            
 
         }
 
@@ -273,9 +299,7 @@ public class GameController : MonoBehaviour
         // Enable the AI controller on each crab to begin
         for (int i1 = 0; i1 < Crabs.Length; i1++)
         {
-
             Crabs[i1].GetComponent<CrabAIController>().SetCrabAIEnabled(true);
-
         }
 
 
@@ -299,6 +323,7 @@ public class GameController : MonoBehaviour
 
             // Reset the timers
             FinalGameCountDownTimer = 0.0f;
+            //Play victory music and present winner!
         }
 
     }
@@ -401,6 +426,23 @@ public class GameController : MonoBehaviour
         newAudio.playOnAwake = playAwake;
         newAudio.volume = volume;
         return newAudio;
+    }
+
+    private AudioClip MakeSubclip(AudioClip clip, float start, float stop)
+    {
+        /* Create a new audio clip */
+        int frequency = clip.frequency;
+        float timeLength = stop - start;
+        int samplesLength = (int)(frequency * timeLength);
+        AudioClip newClip = AudioClip.Create(clip.name + "-sub", samplesLength, 1, frequency, false);
+        /* Create a temporary buffer for the samples */
+        float[] data = new float[samplesLength];
+        /* Get the data from the original clip */
+        clip.GetData(data, (int)(frequency * start));
+        /* Transfer the data to the new clip */
+        newClip.SetData(data, 0);
+        /* Return the sub clip */
+        return newClip;
     }
 
 }

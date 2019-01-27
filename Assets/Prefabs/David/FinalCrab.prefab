@@ -89,6 +89,8 @@ MonoBehaviour:
   shellObject3: {fileID: 0}
   shellObject4: {fileID: 0}
   crabShellConnectionPoint: {fileID: 1648719114321632382}
+  pickupSound: {fileID: 8300000, guid: 2f980ec8e1235544d80fa25c251d90c7, type: 3}
+  audioPickup: {fileID: 0}
 --- !u!114 &1648719114679719505
 MonoBehaviour:
   m_ObjectHideFlags: 0
