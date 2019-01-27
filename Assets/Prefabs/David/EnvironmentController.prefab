@@ -153,6 +153,9 @@ MonoBehaviour:
   despawnWaveSpeed: 20
   waveSpawnTimeMax: 15
   waveSpawnTimeMin: 3
+  waveSound: {fileID: 8300000, guid: 193802531e79cdf48baa716104fd7a81, type: 3}
+  audioWave: {fileID: 0}
+  audioWaveDespawn: {fileID: 0}
 --- !u!1 &1944256157874189765
 GameObject:
   m_ObjectHideFlags: 0

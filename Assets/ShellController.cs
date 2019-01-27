@@ -71,7 +71,7 @@ public class ShellController : MonoBehaviour
             shell.transform.rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
             shell.transform.position = crabShellConnectionPoint.transform.position;
             shell.transform.parent = crabShellConnectionPoint.transform;
-            shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+            shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 116;
             CrabController tempCrabController = gameObject.GetComponent<CrabController>();
             ShellStatsController tempShellStatsController = shell.GetComponentInChildren<ShellStatsController>();
             tempCrabController.moveSpeed = tempCrabController.moveSpeed + tempShellStatsController.movementSpeed;
@@ -92,7 +92,7 @@ public class ShellController : MonoBehaviour
             shell.transform.rotation = previousRotation *= Quaternion.Euler(0, 0, 90); ;
             shell.transform.position = crabShellConnectionPoint.transform.position;
             shell.transform.parent = crabShellConnectionPoint.transform;
-            shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 101;
+            shell.GetComponentInChildren<SpriteRenderer>().sortingOrder = 116;
             //Apply the stats of this shell to the crab
             CrabController tempCrabController = gameObject.GetComponent<CrabController>();
             ShellStatsController tempShellStatsController = shell.GetComponentInChildren<ShellStatsController>();

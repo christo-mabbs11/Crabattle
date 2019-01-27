@@ -26,15 +26,29 @@ public class DeathAnimationScript : MonoBehaviour
 
     }
 
-    public void disableSprite()
+    public void enableIdle()
     {
-        deathSpriteRender.sprite = aliveSprite;
-        //deathSpriteRender.enabled = false;
+        Debug.Log("FALSE!");
+        deathSpriteRender.sprite = aliveSprite;        
+        (gameObject.transform.Find("crab-base_01_animate-left")).gameObject.SetActive(false);
+        deathSpriteRender.enabled = true;
     }
 
-    public void enableSprite()
+    public void enableDeath()
     {
-        deathSpriteRender.sprite = deathSprite;
-        //deathSpriteRender.enabled = true;
+        Debug.Log("FALSE 2!");
+        (gameObject.transform.Find("crab-base_01_animate-left")).gameObject.SetActive(false);
+        deathSpriteRender.sprite = deathSprite;        
+        deathSpriteRender.enabled = true;
+    }
+
+    public void enableMovement()
+    {
+        if ((gameObject.transform.Find("crab-base_01_animate-left")).gameObject.activeInHierarchy == false)
+        {
+            (gameObject.transform.Find("crab-base_01_animate-left")).gameObject.SetActive(true);
+            deathSpriteRender.sprite = deathSprite;
+            deathSpriteRender.enabled = false;
+        }
     }
 }

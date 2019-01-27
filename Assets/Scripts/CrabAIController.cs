@@ -17,6 +17,10 @@ public class CrabAIController : MonoBehaviour
     private battleAnimationScript battleCloudSprite;
     private DeathAnimationScript deathCloudSprite;
 
+    private int stopTick = 0;
+
+    private Vector3 previousTransform;
+
     GameObject closestCrab = null;
 
     public int CrabID = -1;
@@ -27,7 +31,7 @@ public class CrabAIController : MonoBehaviour
         crabController = gameObject.GetComponent<CrabController>();
         battleCloudSprite = gameObject.GetComponentInChildren<battleAnimationScript>();
         deathCloudSprite = gameObject.GetComponentInChildren<DeathAnimationScript>();
-        
+        this.previousTransform = this.gameObject.transform.position;
     }
 
     public void PostAllCrabsCreateInit()
@@ -61,7 +65,6 @@ public class CrabAIController : MonoBehaviour
     // Fixed update function for crab decision making
     void FixedUpdate()
     {
-
         // Make decisions if AI is running
         if (CrabAIEnabled)
         {
@@ -130,11 +133,35 @@ public class CrabAIController : MonoBehaviour
 
         }
 
+        //Debug.Log("Previous Transform = "+ this.previousTransform.ToString());
+        //Debug.Log(" , New transform = " + gameObject.transform.position.ToString());
+        Debug.Log("Stop tick = "+stopTick);
+        if (aiState == AI_STATE.STATE_DEAD)
+        {
+            deathCloudSprite.enableDeath();
+        }
+        else if (this.previousTransform != gameObject.transform.position)
+        {
+            Debug.Log("MOVING!!! ++++++++++++++++++");
+            deathCloudSprite.enableMovement();
+            stopTick = 5;
+        }
+        else if (stopTick <= 0 && this.previousTransform == gameObject.transform.position)
+        {
+            deathCloudSprite.enableIdle();            
+        }        
+        else
+        {
+            deathCloudSprite.enableMovement();
+            stopTick = stopTick - 1;
+        }
+        
+        this.previousTransform = gameObject.transform.position;
+
     }
 
     void Update()
-    {
-
+    {       
         if (aiState == AI_STATE.STATE_FIGHT)
         {
             battleCloudSprite.enableSprite();
@@ -142,16 +169,7 @@ public class CrabAIController : MonoBehaviour
         else
         {
             battleCloudSprite.disableSprite();
-        }
-
-        if (aiState == AI_STATE.STATE_DEAD)
-        {
-            deathCloudSprite.enableSprite();
-        }
-        else
-        {
-            deathCloudSprite.disableSprite();
-        }
+        }        
 
         // Complete actions if AI is running
         if (CrabAIEnabled)
@@ -238,8 +256,7 @@ public class CrabAIController : MonoBehaviour
                 }
 
             }
-        }
-
+        }        
     }
 
     private float convertAngle360(float argAngle)

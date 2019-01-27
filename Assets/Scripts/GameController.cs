@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour
     GUIStyle GeneralGUIStyle, GeneralGUIStyle_medium, GeneralGUIStyle_smaller, GeneralGUIStyle_xsmaller, GeneralGUIStyle_xxsmaller, GeneralGUIStyle_outline, GeneralGUIStyle_medium_outline, GeneralGUIStyle_smaller_outline;
     Color TextColor;
     public Texture SplashImageTex;
+    public Texture WinnerImageTex;
 
     ////////////////
     // References //
@@ -249,29 +250,45 @@ public class GameController : MonoBehaviour
             // Add that crab to the game world and starts the game
             GameObject tempCrab = (GameObject)Instantiate(CrabPrefab, CrabSpawns[i1].transform.position, CrabSpawns[i1].transform.rotation);
             if (i1 == 0)
-            {
-                Material newMat = Resources.Load("Crab_Orange", typeof(Material)) as Material;
-                //gameObject.renderer.material = newMat;
+            {                
                 tempCrab.transform.Find("CrabSprite").GetComponent<SpriteRenderer>().material = basic;
             }
             else if (i1 == 1)
-            {
-                Material newMat = Resources.Load("Crab_Orange", typeof(Material)) as Material;
-                //gameObject.renderer.material = newMat;
+            {                
                 tempCrab.transform.Find("CrabSprite").GetComponent<SpriteRenderer>().material = red;
+                Debug.Log("1" + tempCrab.ToString());
+                Debug.Log("2" + tempCrab.transform.ToString());
+                Debug.Log("3" + tempCrab.transform.Find("CrabSprite").Find("crab-base_01_animate-left").ToString());
+                Debug.Log("4" + tempCrab.transform.Find("CrabSprite").Find("crab-base_01_animate-left").gameObject.ToString());
+                GameObject skeletonObject = (tempCrab.transform.Find("CrabSprite").Find("crab-base_01_animate-left")).gameObject;
+                SpriteRenderer[] componentArray = skeletonObject.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer renderer in componentArray)
+                {
+                    renderer.material = red;
+                }
             }
             else if (i1 == 2)
             {
-                Material newMat = Resources.Load("Crab_Red", typeof(Material)) as Material;
-                //gameObject.renderer.material = newMat;
+                
                 tempCrab.transform.Find("CrabSprite").GetComponent<SpriteRenderer>().material = orange;
-                Debug.Log("Material = ",newMat);
+                GameObject skeletonObject = (tempCrab.transform.Find("CrabSprite").Find("crab-base_01_animate-left")).gameObject;
+                SpriteRenderer[] componentArray = skeletonObject.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer renderer in componentArray)
+                {
+                    renderer.material = orange;
+                }
+
             }
             else if (i1 == 3)
             {
-                Material newMat = Resources.Load("Crab_Yellow", typeof(Material)) as Material;
-                //gameObject.renderer.material = newMat;
+                
                 tempCrab.transform.Find("CrabSprite").GetComponent<SpriteRenderer>().material = yellow;
+                GameObject skeletonObject = (tempCrab.transform.Find("CrabSprite").Find("crab-base_01_animate-left")).gameObject;
+                SpriteRenderer[] componentArray = skeletonObject.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer renderer in componentArray)
+                {
+                    renderer.material = yellow;
+                }
             }
             Crabs[i1] = tempCrab.GetComponent<CrabController>();
             Crabs[i1].GetComponent<CrabAIController>().CrabID = i1;
@@ -391,6 +408,7 @@ public class GameController : MonoBehaviour
         float imgHeight = imgWidth * 375.0f / 477.0f;
 
         GUI.DrawTexture(new Rect(Screen.width * 0.33f, Screen.height * 0.1f, imgWidth, imgHeight), SplashImageTex);
+        GUI.DrawTexture(new Rect(0,0, Screen.width, Screen.height), WinnerImageTex);
         GUI.Label(new Rect(Screen.width * 0.33f, Screen.height * 0.82f, 0.0f, 0.0f), "BUILD YOUR PERFECT HOME...", GeneralGUIStyle_smaller);
         GUI.Label(new Rect(Screen.width * 0.3f, Screen.height * 0.9f, 0.0f, 0.0f), "PROTECT IT FROM SHELL THIEVES!", GeneralGUIStyle_smaller);
 
@@ -423,7 +441,12 @@ public class GameController : MonoBehaviour
 
     private void WinnerUI()
     {
-        GUI.Label(new Rect(Screen.width * 0.28f, Screen.height * 0.1f, 0.0f, 0.0f), "YOU HAVE THE MOST FABULOUS HOME!", GeneralGUIStyle_smaller);
+        //float imgWidth = Screen.width * 0.37f;
+        //float imgHeight = imgWidth * 375.0f / 477.0f;
+        float imgWidth = Screen.width;
+        float imgHeight = Screen.height;
+        //GUI.DrawTexture(new Rect(Screen.width * 0.33f, Screen.height * 0.1f, imgWidth, imgHeight), WinnerImageTex);
+        GUI.Label(new Rect(Screen.width * 0.2f, Screen.height * 0.1f, 0.0f, 0.0f), "YOU HAVE THE MOST FABULOUS HOME!", GeneralGUIStyle_medium);
     }
 
     //clip:AudioClip, loop: boolean, playAwake: boolean, vol: float): AudioSource

@@ -43,9 +43,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11fa8fd7b6524a428fb4d0e1dbd934a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipPeaceful: {fileID: 0}
-  clipBattle: {fileID: 0}
+  clipPeaceful: {fileID: 8300000, guid: 9dce1c36df5534643a8afeb369a09b86, type: 3}
+  clipBattle: {fileID: 8300000, guid: 8716ba284ff6ae048b621cea926c3569, type: 3}
+  clipFight: {fileID: 8300000, guid: 044450ff2c0037a478918d64e0e03432, type: 3}
+  clipSeaguls: {fileID: 8300000, guid: 5e4ed9208de4eac47809e1c99e8dd0d9, type: 3}
+  basic: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  red: {fileID: 2100000, guid: ee07833ae6b0df64caa0d255535ce1b7, type: 2}
+  orange: {fileID: 2100000, guid: c1035460fe4d9484f8ebc45cac332440, type: 2}
+  yellow: {fileID: 2100000, guid: 884ed6575200d814b8ac9709091c18de, type: 2}
   audioPeaceful: {fileID: 0}
   audioBattle: {fileID: 0}
+  audioFight: {fileID: 0}
+  audioSeaguls: {fileID: 0}
   SplashImageTex: {fileID: 2800000, guid: 72356b9c7a0a3ee42890c29b3e646f8a, type: 3}
-  CrabPrefab: {fileID: 1254873493704994, guid: 5e22ff1436c7ba34181470a3af8e9bb8, type: 3}
+  WinnerImageTex: {fileID: 2800000, guid: 659ec530c581da04bb7753f4cce78705, type: 3}
+  CrabPrefab: {fileID: 1648719114679719506, guid: ae1f34a8ee1b8f940be7b3494423c9f1,
+    type: 3}

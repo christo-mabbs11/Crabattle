@@ -11,8 +11,7 @@ public class CrabController : MonoBehaviour
 
     Rigidbody2D Rigidbody2DRef;
     GameController GameControllerRef;
-    AudioController audioController;
-    
+    AudioController audioController;    
 
     /////////////////////////////
     // State related variables //
@@ -60,7 +59,7 @@ public class CrabController : MonoBehaviour
     }
 
     void Update()
-    {
+    {        
         turnSpeed = moveSpeed * 65;
         // If the crab is fighting, run the the fight functionality
         if (CrabState == (int)CRAB_STATE.STATE_FIGHT)
@@ -85,7 +84,7 @@ public class CrabController : MonoBehaviour
         }
 
         // Apply rotation
-        Rigidbody2DRef.MoveRotation(Rigidbody2DRef.rotation + turnSpeed * speedDirect * Time.deltaTime);
+        Rigidbody2DRef.MoveRotation(Rigidbody2DRef.rotation + turnSpeed * speedDirect * Time.fixedDeltaTime);
 
 
     }
