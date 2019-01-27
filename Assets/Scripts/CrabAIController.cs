@@ -17,6 +17,8 @@ public class CrabAIController : MonoBehaviour
     private battleAnimationScript battleCloudSprite;
     private DeathAnimationScript deathCloudSprite;
 
+    public GameObject playerText;
+
     private int stopTick = 0;
 
     private Vector3 previousTransform;
@@ -32,6 +34,11 @@ public class CrabAIController : MonoBehaviour
         battleCloudSprite = gameObject.GetComponentInChildren<battleAnimationScript>();
         deathCloudSprite = gameObject.GetComponentInChildren<DeathAnimationScript>();
         this.previousTransform = this.gameObject.transform.position;
+    }
+
+    public void setupPlayerName(int playerNumber)
+    {
+        playerText.GetComponent<TMPro.TextMeshPro>().text = "P" + (playerNumber+1);
     }
 
     public void PostAllCrabsCreateInit()

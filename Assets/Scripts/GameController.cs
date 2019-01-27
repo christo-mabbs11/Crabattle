@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class GameController : MonoBehaviour
     public Material red;
     public Material orange;
     public Material yellow;
+
+    public GameObject canvas;
 
     [HideInInspector]
     public AudioSource audioPeaceful;
@@ -292,6 +295,8 @@ public class GameController : MonoBehaviour
             }
             Crabs[i1] = tempCrab.GetComponent<CrabController>();
             Crabs[i1].GetComponent<CrabAIController>().CrabID = i1;
+            Crabs[i1].GetComponent<CrabAIController>().setupPlayerName(i1);
+            
         }
 
         // Init all crabs
@@ -406,7 +411,7 @@ public class GameController : MonoBehaviour
 
         float imgWidth = Screen.width * 0.37f;
         float imgHeight = imgWidth * 375.0f / 477.0f;
-
+        canvas.SetActive(false);
         GUI.DrawTexture(new Rect(Screen.width * 0.33f, Screen.height * 0.1f, imgWidth, imgHeight), SplashImageTex);
         GUI.DrawTexture(new Rect(0,0, Screen.width, Screen.height), WinnerImageTex);
         GUI.Label(new Rect(Screen.width * 0.33f, Screen.height * 0.82f, 0.0f, 0.0f), "BUILD YOUR PERFECT HOME...", GeneralGUIStyle_smaller);
@@ -416,7 +421,7 @@ public class GameController : MonoBehaviour
 
     private void CountDownUI()
     {
-
+        canvas.SetActive(false);
         // Print the timer
         int timeInt = (int)Mathf.Round(CountDownTotalTime - CountDownTimer);    // Get the remaining time as an int
         string timeString = timeInt.ToString(); // Convert remaning time to string
@@ -436,17 +441,26 @@ public class GameController : MonoBehaviour
 
     private void FightUI()
     {
+        canvas.SetActive(false);
         GUI.Label(new Rect(Screen.width * 0.385f, Screen.height * 0.0f, 0.0f, 0.0f), "FIGHT", GeneralGUIStyle);
     }
 
     private void WinnerUI()
     {
+        canvas.SetActive(true);
+        string winner = "";
+        foreach (CrabController myCrab in this.Crabs)
+        {
+            if (myCrab.gameObject.GetComponent<CrabAIController>().aiState != CrabAIController.AI_STATE.STATE_DEAD)
+                winner = "" + (myCrab.gameObject.GetComponent<CrabAIController>().CrabID+1);        
+        }
+        canvas.transform.Find("Text").gameObject.GetComponent<Text>().text = "Player "+ winner;
         //float imgWidth = Screen.width * 0.37f;
         //float imgHeight = imgWidth * 375.0f / 477.0f;
         float imgWidth = Screen.width;
         float imgHeight = Screen.height;
         //GUI.DrawTexture(new Rect(Screen.width * 0.33f, Screen.height * 0.1f, imgWidth, imgHeight), WinnerImageTex);
-        GUI.Label(new Rect(Screen.width * 0.2f, Screen.height * 0.1f, 0.0f, 0.0f), "YOU HAVE THE MOST FABULOUS HOME!", GeneralGUIStyle_medium);
+        //GUI.Label(new Rect(Screen.width * 0.2f, Screen.height * 0.1f, 0.0f, 0.0f), "YOU HAVE THE MOST FABULOUS HOME!", GeneralGUIStyle_medium);
     }
 
     //clip:AudioClip, loop: boolean, playAwake: boolean, vol: float): AudioSource
