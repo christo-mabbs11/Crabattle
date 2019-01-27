@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     // GUI biz
     GUIStyle GeneralGUIStyle, GeneralGUIStyle_medium, GeneralGUIStyle_smaller, GeneralGUIStyle_xsmaller, GeneralGUIStyle_xxsmaller, GeneralGUIStyle_outline, GeneralGUIStyle_medium_outline, GeneralGUIStyle_smaller_outline;
     Color TextColor;
+    public Texture SplashImageTex;
 
     ////////////////
     // References //
@@ -266,7 +267,7 @@ public class GameController : MonoBehaviour
             FinalGameCountDownEnabled = true;
 
             // Reset the timers
-            FinalGameCountDownTimer = 0.0f;            
+            FinalGameCountDownTimer = 0.0f;
         }
 
     }
@@ -320,9 +321,14 @@ public class GameController : MonoBehaviour
 
     private void MenuUI()
     {
-        GUI.Label(new Rect(Screen.width * 0.18f, Screen.height * 0.03f, 0.0f, 0.0f), "BATTLE HERMITS", GeneralGUIStyle);
-        GUI.Label(new Rect(Screen.width * 0.3f, Screen.height * 0.25f, 0.0f, 0.0f), "BASED ON TRUE EVENTS", GeneralGUIStyle_medium);
-        GUI.Label(new Rect(Screen.width * 0.32f, Screen.height * 0.9f, 0.0f, 0.0f), "(PRESS SPACE TO START)", GeneralGUIStyle_smaller);
+
+        float imgWidth = Screen.width * 0.33f;
+        float imgHeight = imgWidth * 375.0f / 477.0f;
+
+        GUI.DrawTexture(new Rect(Screen.width * 0.33f, Screen.height * 0.1f, imgWidth, imgHeight), SplashImageTex);
+        GUI.Label(new Rect(Screen.width * 0.43f, Screen.height * 0.65f, 0.0f, 0.0f), "BASED ON TRUE EVENTS", GeneralGUIStyle_xsmaller);
+        GUI.Label(new Rect(Screen.width * 0.33f, Screen.height * 0.9f, 0.0f, 0.0f), "(PRESS SPACE TO START)", GeneralGUIStyle_smaller);
+
     }
 
     private void CountDownUI()
