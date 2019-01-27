@@ -28,6 +28,12 @@ public class GameController : MonoBehaviour
     public AudioClip clipPeaceful;
     public AudioClip clipBattle;
 
+    //Players
+    public Material basic;
+    public Material red;
+    public Material orange;
+    public Material yellow;
+
     [HideInInspector]
     public AudioSource audioPeaceful;
     [HideInInspector]
@@ -206,6 +212,31 @@ public class GameController : MonoBehaviour
 
             // Add that crab to the game world and starts the game
             GameObject tempCrab = (GameObject)Instantiate(CrabPrefab, CrabSpawns[i1].transform.position, CrabSpawns[i1].transform.rotation);
+            if (i1 == 0)
+            {
+                Material newMat = Resources.Load("Crab_Orange", typeof(Material)) as Material;
+                //gameObject.renderer.material = newMat;
+                tempCrab.transform.Find("CrabSprite").GetComponent<SpriteRenderer>().material = basic;
+            }
+            else if (i1 == 1)
+            {
+                Material newMat = Resources.Load("Crab_Orange", typeof(Material)) as Material;
+                //gameObject.renderer.material = newMat;
+                tempCrab.transform.Find("CrabSprite").GetComponent<SpriteRenderer>().material = red;
+            }
+            else if (i1 == 2)
+            {
+                Material newMat = Resources.Load("Crab_Red", typeof(Material)) as Material;
+                //gameObject.renderer.material = newMat;
+                tempCrab.transform.Find("CrabSprite").GetComponent<SpriteRenderer>().material = orange;
+                Debug.Log("Material = ",newMat);
+            }
+            else if (i1 == 3)
+            {
+                Material newMat = Resources.Load("Crab_Yellow", typeof(Material)) as Material;
+                //gameObject.renderer.material = newMat;
+                tempCrab.transform.Find("CrabSprite").GetComponent<SpriteRenderer>().material = yellow;
+            }
             Crabs[i1] = tempCrab.GetComponent<CrabController>();
             Crabs[i1].GetComponent<CrabAIController>().CrabID = i1;
         }

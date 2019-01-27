@@ -1003,5 +1003,25 @@ PrefabInstance:
       propertyPath: clipBattle
       value: 
       objectReference: {fileID: 8300000, guid: 8716ba284ff6ae048b621cea926c3569, type: 3}
+    - target: {fileID: 2104823733837604006, guid: 1aa03530f2eddb94e9086742fc6a6dcf,
+        type: 3}
+      propertyPath: basic
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 2104823733837604006, guid: 1aa03530f2eddb94e9086742fc6a6dcf,
+        type: 3}
+      propertyPath: red
+      value: 
+      objectReference: {fileID: 2100000, guid: ee07833ae6b0df64caa0d255535ce1b7, type: 2}
+    - target: {fileID: 2104823733837604006, guid: 1aa03530f2eddb94e9086742fc6a6dcf,
+        type: 3}
+      propertyPath: orange
+      value: 
+      objectReference: {fileID: 2100000, guid: c1035460fe4d9484f8ebc45cac332440, type: 2}
+    - target: {fileID: 2104823733837604006, guid: 1aa03530f2eddb94e9086742fc6a6dcf,
+        type: 3}
+      propertyPath: yellow
+      value: 
+      objectReference: {fileID: 2100000, guid: 884ed6575200d814b8ac9709091c18de, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aa03530f2eddb94e9086742fc6a6dcf, type: 3}
