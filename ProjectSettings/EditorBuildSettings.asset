@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Christo Scene.unity
+    guid: ade3303612e77db489d2238529dcba5b
   m_configObjects: {}
