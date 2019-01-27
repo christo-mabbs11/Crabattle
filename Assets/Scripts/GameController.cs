@@ -378,12 +378,12 @@ public class GameController : MonoBehaviour
     private void MenuUI()
     {
 
-        float imgWidth = Screen.width * 0.33f;
+        float imgWidth = Screen.width * 0.37f;
         float imgHeight = imgWidth * 375.0f / 477.0f;
 
         GUI.DrawTexture(new Rect(Screen.width * 0.33f, Screen.height * 0.1f, imgWidth, imgHeight), SplashImageTex);
-        GUI.Label(new Rect(Screen.width * 0.43f, Screen.height * 0.65f, 0.0f, 0.0f), "BASED ON TRUE EVENTS", GeneralGUIStyle_xsmaller);
-        GUI.Label(new Rect(Screen.width * 0.33f, Screen.height * 0.9f, 0.0f, 0.0f), "(PRESS SPACE TO START)", GeneralGUIStyle_smaller);
+        GUI.Label(new Rect(Screen.width * 0.33f, Screen.height * 0.82f, 0.0f, 0.0f), "BUILD YOUR PERFECT HOME...", GeneralGUIStyle_smaller);
+        GUI.Label(new Rect(Screen.width * 0.3f, Screen.height * 0.9f, 0.0f, 0.0f), "PROTECT IT FROM SHELL THIEVES!", GeneralGUIStyle_smaller);
 
     }
 
